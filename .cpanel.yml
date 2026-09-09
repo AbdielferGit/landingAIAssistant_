@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - /bin/cp -R out/. "$HOME/public_html/website_87943c0c/"
