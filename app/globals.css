@@ -53,6 +53,9 @@ button { color: inherit; }
   border-bottom: 1px solid var(--line);
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; width: fit-content; font-size: 19px; font-weight: 740; letter-spacing: -0.04em; }
+.brand-name { display: inline-flex; flex-direction: column; gap: 2px; line-height: .95; white-space: nowrap; }
+.brand-name small { color: #66747c; font-size: 10px; font-weight: 590; letter-spacing: -.015em; transition: color .2s ease; }
+.brand-header:hover .brand-name small { color: var(--blue); }
 .brand-mark { position: relative; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--blue); transform: rotate(-7deg); box-shadow: 0 8px 24px rgba(31, 72, 214, 0.24); }
 .brand-mark::before, .brand-mark::after, .brand-mark span { content: ''; display: block; position: absolute; border-radius: 99px; background: white; }
 .brand-mark::before { width: 16px; height: 5px; transform: translateY(-5px); }

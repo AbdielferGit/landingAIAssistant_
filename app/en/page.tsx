@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LandingPage from '../LandingPage';
 
 export const metadata: Metadata = {
-  title: 'AiAssistant — AI adoption for companies',
+  title: 'AiAssistant by InnovaMontreal — AI adoption for companies',
   description: 'We guide your company through the practical, responsible adoption of artificial intelligence.',
   alternates: {
     canonical: '/en/',

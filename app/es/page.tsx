@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LandingPage from '../LandingPage';
 
 export const metadata: Metadata = {
-  title: 'AiAssistant — Adopción de IA para empresas',
+  title: 'AiAssistant by InnovaMontreal — Adopción de IA para empresas',
   description: 'Acompañamos a tu empresa en la adopción práctica y responsable de inteligencia artificial.',
   alternates: {
     canonical: '/es/',

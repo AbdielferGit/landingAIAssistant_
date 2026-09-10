@@ -14,7 +14,7 @@ const crmEndpoint = process.env.NEXT_PUBLIC_CRM_ENDPOINT?.trim() ?? '';
 
 const content = {
   es: {
-    navLabel: 'Navegación principal', homeLabel: 'AiAssistant, inicio', languageLabel: 'Idioma',
+    navLabel: 'Navegación principal', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Idioma',
     navMethod: 'Método', navApplications: 'Aplicaciones', navQuestions: 'Preguntas', call: 'Agenda una llamada',
     eyebrow: 'Adopción responsable · Resultados medibles', heroFirst: 'Haz que la IA trabaje', heroSecond: 'como parte de tu equipo.',
     heroLead: 'Acompañamos a tu empresa desde la curiosidad hasta la adopción real: estrategia, procesos y equipos preparados para avanzar con confianza.',
@@ -64,7 +64,7 @@ const content = {
     footerLineOne: 'La transición a la IA,', footerLineTwo: 'con claridad y propósito.', footerCta: 'Hablemos', footerDescriptor: 'Adopción de IA para empresas', backTop: 'Volver arriba ↑',
   },
   en: {
-    navLabel: 'Main navigation', homeLabel: 'AiAssistant, home', languageLabel: 'Language',
+    navLabel: 'Main navigation', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Language',
     navMethod: 'Method', navApplications: 'Applications', navQuestions: 'Questions', call: 'Book a call',
     eyebrow: 'Responsible adoption · Measurable results', heroFirst: 'Make AI work', heroSecond: 'as part of your team.',
     heroLead: 'We guide your company from curiosity to real adoption—with the right strategy, processes and team support to move forward confidently.',
@@ -114,7 +114,7 @@ const content = {
     footerLineOne: 'Your transition to AI,', footerLineTwo: 'with clarity and purpose.', footerCta: 'Let’s talk', footerDescriptor: 'AI adoption for companies', backTop: 'Back to top ↑',
   },
   fr: {
-    navLabel: 'Navigation principale', homeLabel: 'AiAssistant, accueil', languageLabel: 'Langue',
+    navLabel: 'Navigation principale', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Langue',
     navMethod: 'Méthode', navApplications: 'Applications', navQuestions: 'Questions', call: 'Réserver un appel',
     eyebrow: 'Adoption responsable · Résultats mesurables', heroFirst: 'Faites travailler l’IA', heroSecond: 'aux côtés de votre équipe.',
     heroLead: 'Nous accompagnons votre entreprise, de la curiosité à l’adoption concrète : une stratégie, des processus et des équipes prêts à avancer avec confiance.',
@@ -222,7 +222,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
     <main>
       <section className="hero" id="top">
         <nav className="nav shell" aria-label={c.navLabel}>
-          <a className="brand" href="#top" aria-label={c.homeLabel}><span className="brand-mark" aria-hidden="true"><span /></span><span>AiAssistant</span></a>
+          <a className="brand brand-header" href="https://www.innovamontreal.com/" target="_blank" rel="noopener noreferrer" aria-label={c.homeLabel}><span className="brand-mark" aria-hidden="true"><span /></span><span className="brand-name">AiAssistant <small>by InnovaMontreal</small></span></a>
           <div className="nav-links"><a href="#method">{c.navMethod}</a><a href="#applications">{c.navApplications}</a><a href="#questions">{c.navQuestions}</a></div>
           <div className="nav-actions">
             <div className="language-switcher" aria-label={c.languageLabel}>
