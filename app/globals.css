@@ -268,6 +268,11 @@ input:focus, select:focus, textarea:focus { border-color: var(--blue); backgroun
 input::placeholder, textarea::placeholder { color: #a0a9ae; }
 .form-submit { width: 100%; min-height: 52px; margin-top: 4px; background: var(--blue); color: white; }
 .form-submit:hover { background: var(--blue-deep); }
+.form-submit:disabled { cursor: wait; opacity: .72; }
+.consent-row { grid-template-columns: 18px 1fr; align-items: start; gap: 10px; font-weight: 520; line-height: 1.5; }
+.consent-row input { width: 17px; height: 17px; margin: 2px 0 0; padding: 0; accent-color: var(--blue); }
+.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-error { margin: 0; color: #a52a1e; font-size: 10px; line-height: 1.45; text-align: center; }
 .form-note { margin: -2px 0 0; color: #8b959a; font-size: 9px; text-align: center; }
 .form-note span { color: #78a73c; }
 .success-message { min-height: 570px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }

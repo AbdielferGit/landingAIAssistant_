@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AiAssistant CRM</title>
+    <style>
+      :root {
+        --ink: #18242b;
+        --muted: #68777f;
+        --line: #dfe4e6;
+        --paper: #f4f5f1;
+        --white: #ffffff;
+        --blue: #1f48d6;
+        --blue-deep: #1737a6;
+        --lime: #c9f36b;
+        --red: #b42318;
+        --shadow: 0 24px 70px rgba(24, 36, 43, 0.11);
+      }
+
+      * { box-sizing: border-box; }
+      html { color-scheme: light; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+      }
+      button, input, select, textarea { font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      [hidden] { display: none !important; }
+
+      .login-shell {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        background:
+          radial-gradient(circle at 15% 20%, rgba(31, 72, 214, .12), transparent 35%),
+          radial-gradient(circle at 85% 80%, rgba(201, 243, 107, .2), transparent 30%),
+          var(--paper);
+      }
+      .login-card {
+        width: min(100%, 430px);
+        padding: 34px;
+        border: 1px solid rgba(24, 36, 43, .1);
+        border-radius: 22px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 750; letter-spacing: -.03em; }
+      .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--blue); color: var(--lime); font-size: 17px; }
+      .login-card h1 { margin: 34px 0 10px; font-size: 33px; line-height: 1; letter-spacing: -.055em; }
+      .login-card p { margin: 0 0 25px; color: var(--muted); line-height: 1.6; }
+      label { display: grid; gap: 8px; color: #40515a; font-size: 12px; font-weight: 700; }
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid #d4dade;
+        border-radius: 10px;
+        outline: none;
+        background: #fafbfa;
+        color: var(--ink);
+      }
+      input, select { height: 44px; padding: 0 12px; }
+      textarea { min-height: 110px; padding: 12px; resize: vertical; line-height: 1.5; }
+      input:focus, select:focus, textarea:focus { border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(31,72,214,.09); }
+      .primary, .secondary, .ghost {
+        min-height: 42px;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .primary { padding: 0 16px; background: var(--blue); color: white; }
+      .primary:hover { background: var(--blue-deep); }
+      .secondary { padding: 0 14px; border: 1px solid var(--line); background: white; color: var(--ink); }
+      .ghost { padding: 0 10px; background: transparent; color: var(--muted); }
+      .login-card .primary { width: 100%; margin-top: 17px; }
+      .error { min-height: 18px; margin-top: 13px !important; color: var(--red) !important; font-size: 12px; }
+
+      .app-shell { min-height: 100vh; }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 70px;
+        padding: 0 clamp(18px, 4vw, 58px);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,255,255,.94);
+        backdrop-filter: blur(14px);
+      }
+      .top-actions { display: flex; align-items: center; gap: 8px; }
+      .top-actions a { color: var(--blue); font-size: 12px; font-weight: 700; text-decoration: none; }
+      .page { width: min(1480px, calc(100% - 36px)); margin: 0 auto; padding: 38px 0 70px; }
+      .heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
+      .heading h1 { margin: 0; font-size: clamp(31px, 4vw, 48px); letter-spacing: -.06em; }
+      .heading p { margin: 8px 0 0; color: var(--muted); }
+      .sync-state { color: var(--muted); font-size: 11px; text-align: right; }
+
+      .metrics { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+      .metric { min-height: 115px; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+      .metric span { display: block; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+      .metric strong { display: block; margin-top: 23px; font-size: 33px; letter-spacing: -.05em; }
+      .metric:first-child { border-color: rgba(31,72,214,.25); background: #eef2ff; }
+
+      .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 18px; align-items: start; }
+      .panel { border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: 0 14px 45px rgba(24,36,43,.05); }
+      .toolbar { display: grid; grid-template-columns: minmax(220px, 1fr) 190px auto; gap: 10px; padding: 14px; border-bottom: 1px solid var(--line); }
+      .toolbar input, .toolbar select { height: 40px; }
+      .table-wrap { overflow: auto; max-height: 680px; }
+      table { width: 100%; border-collapse: collapse; min-width: 880px; }
+      th { position: sticky; top: 0; z-index: 2; padding: 12px 14px; border-bottom: 1px solid var(--line); background: #f3f5f5; color: #55656d; font-size: 10px; text-align: left; text-transform: uppercase; letter-spacing: .06em; }
+      td { padding: 13px 14px; border-bottom: 1px solid #edf0f1; vertical-align: top; }
+      tbody tr { cursor: pointer; transition: background .15s ease; }
+      tbody tr:hover, tbody tr.selected { background: #f7f9ff; }
+      td strong { display: block; margin-bottom: 3px; }
+      td small { color: var(--muted); }
+      .empty { padding: 60px 20px; color: var(--muted); text-align: center; }
+      .pill { display: inline-flex; align-items: center; min-height: 26px; padding: 0 9px; border-radius: 999px; background: #eef1f2; color: #52636b; font-size: 10px; font-weight: 750; }
+      .pill-nuevo { background: #e9eeff; color: #2449bf; }
+      .pill-contactado { background: #e7f6ff; color: #075985; }
+      .pill-calificado { background: #eefbd7; color: #3f6212; }
+      .pill-propuesta { background: #fff3cc; color: #92400e; }
+      .pill-ganado { background: #dcfce7; color: #166534; }
+      .pill-perdido { background: #fee2e2; color: #991b1b; }
+
+      .detail { position: sticky; top: 88px; overflow: hidden; }
+      .detail-empty { min-height: 330px; display: grid; place-items: center; padding: 35px; color: var(--muted); text-align: center; line-height: 1.6; }
+      .detail-content { max-height: calc(100vh - 110px); overflow: auto; }
+      .detail-head { padding: 22px; border-bottom: 1px solid var(--line); background: #f8faf9; }
+      .detail-head p { margin: 0 0 7px; color: var(--blue); font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: .08em; }
+      .detail-head h2 { margin: 0; font-size: 25px; letter-spacing: -.045em; }
+      .detail-head small { display: block; margin-top: 6px; color: var(--muted); }
+      .detail-section { display: grid; gap: 14px; padding: 20px 22px; border-bottom: 1px solid var(--line); }
+      .detail-section h3 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+      .lead-context { display: grid; gap: 9px; margin: 0; }
+      .lead-context div { display: grid; grid-template-columns: 105px 1fr; gap: 10px; }
+      .lead-context dt { color: var(--muted); }
+      .lead-context dd { margin: 0; overflow-wrap: anywhere; }
+      .lead-context a { color: var(--blue); }
+      .button-row { display: flex; gap: 8px; }
+      .button-row > * { flex: 1; }
+      .timeline { display: grid; gap: 12px; }
+      .activity { position: relative; padding-left: 17px; }
+      .activity::before { content: ''; position: absolute; left: 0; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+      .activity strong { font-size: 11px; }
+      .activity p { margin: 5px 0; color: #40515a; white-space: pre-wrap; line-height: 1.45; }
+      .activity small { color: var(--muted); font-size: 10px; }
+      .toast { position: fixed; right: 22px; bottom: 22px; z-index: 50; max-width: 360px; padding: 13px 16px; border-radius: 10px; background: var(--ink); color: white; box-shadow: var(--shadow); }
+      .toast.bad { background: #8f1d16; }
+
+      @media (max-width: 1100px) {
+        .metrics { grid-template-columns: repeat(3, 1fr); }
+        .workspace { grid-template-columns: 1fr; }
+        .detail { position: static; }
+        .detail-content { max-height: none; }
+      }
+      @media (max-width: 680px) {
+        .topbar { padding: 0 14px; }
+        .top-actions a { display: none; }
+        .page { width: min(100% - 22px, 1480px); padding-top: 26px; }
+        .heading { align-items: flex-start; flex-direction: column; }
+        .sync-state { text-align: left; }
+        .metrics { grid-template-columns: 1fr 1fr; }
+        .metric { min-height: 100px; }
+        .toolbar { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="login-shell" id="loginView">
+      <form class="login-card" id="loginForm">
+        <div class="brand"><span class="brand-mark">A</span><span>AiAssistant</span></div>
+        <h1>CRM de prospectos</h1>
+        <p>Introduce el token de administración generado al configurar el CRM. El token solo se conserva durante esta sesión del navegador.</p>
+        <label>Token de administración
+          <input id="tokenInput" type="password" autocomplete="off" required>
+        </label>
+        <button class="primary" type="submit" id="loginButton">Entrar al CRM</button>
+        <p class="error" id="loginError" role="alert"></p>
+      </form>
+    </section>
+
+    <div class="app-shell" id="appView" hidden>
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">A</span><span>AiAssistant CRM</span></div>
+        <div class="top-actions">
+          <a id="sheetLink" href="#" target="_blank" rel="noopener">Abrir Google Sheet</a>
+          <button class="ghost" type="button" id="logoutButton">Cerrar sesión</button>
+        </div>
+      </header>
+
+      <main class="page">
+        <div class="heading">
+          <div><h1>Pipeline comercial</h1><p id="contactLine">Cargando información…</p></div>
+          <div class="sync-state" id="syncState">Sincronizando…</div>
+        </div>
+
+        <section class="metrics" aria-label="Indicadores del CRM">
+          <article class="metric"><span>Total</span><strong id="metricTotal">0</strong></article>
+          <article class="metric"><span>Nuevos</span><strong id="metricNew">0</strong></article>
+          <article class="metric"><span>Calificados</span><strong id="metricQualified">0</strong></article>
+          <article class="metric"><span>Ganados</span><strong id="metricWon">0</strong></article>
+          <article class="metric"><span>Conversión</span><strong id="metricConversion">0%</strong></article>
+        </section>
+
+        <div class="workspace">
+          <section class="panel">
+            <div class="toolbar">
+              <input id="searchInput" type="search" placeholder="Buscar por nombre, empresa o email">
+              <select id="statusFilter" aria-label="Filtrar por estado"><option value="">Todos los estados</option></select>
+              <button class="secondary" type="button" id="refreshButton">Actualizar</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Prospecto</th><th>Empresa</th><th>Estado</th><th>Fuente</th><th>Seguimiento</th></tr></thead>
+                <tbody id="leadRows"></tbody>
+              </table>
+              <div class="empty" id="emptyState" hidden>No hay prospectos que coincidan con los filtros.</div>
+            </div>
+          </section>
+
+          <aside class="panel detail">
+            <div class="detail-empty" id="detailEmpty">Selecciona un prospecto para revisar su contexto y registrar el próximo paso.</div>
+            <div class="detail-content" id="detailContent" hidden>
+              <div class="detail-head"><p id="detailId"></p><h2 id="detailName"></h2><small id="detailCompany"></small></div>
+              <section class="detail-section"><h3>Contexto</h3><dl class="lead-context" id="leadContext"></dl></section>
+              <form class="detail-section" id="leadForm">
+                <h3>Seguimiento</h3>
+                <label>Estado<select id="leadStatus"></select></label>
+                <label>Responsable<input id="leadOwner" type="text" maxlength="120"></label>
+                <label>Próximo seguimiento<input id="leadFollowUp" type="date"></label>
+                <label>Última nota<textarea id="leadNote" maxlength="2000"></textarea></label>
+                <button class="primary" type="submit" id="saveLeadButton">Guardar cambios</button>
+              </form>
+              <form class="detail-section" id="activityForm">
+                <h3>Nueva actividad</h3>
+                <label>Tipo<select id="activityType"></select></label>
+                <label>Detalle<textarea id="activityDetails" maxlength="3000" required></textarea></label>
+                <button class="secondary" type="submit" id="saveActivityButton">Registrar actividad</button>
+              </form>
+              <section class="detail-section"><h3>Historial</h3><div class="timeline" id="timeline"></div></section>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <script>
+      const state = {
+        token: sessionStorage.getItem('aiassistant_crm_token') || '',
+        data: null,
+        selectedId: '',
+      };
+
+      const elements = Object.fromEntries(Array.from(document.querySelectorAll('[id]')).map((element) => [element.id, element]));
+
+      elements.loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        elements.loginError.textContent = '';
+        state.token = elements.tokenInput.value.trim();
+        await authenticate();
+      });
+
+      elements.logoutButton.addEventListener('click', logout);
+      elements.refreshButton.addEventListener('click', () => refreshData(true));
+      elements.searchInput.addEventListener('input', renderLeadRows);
+      elements.statusFilter.addEventListener('change', renderLeadRows);
+      elements.leadRows.addEventListener('click', (event) => {
+        const row = event.target.closest('tr[data-lead-id]');
+        if (row) selectLead(row.dataset.leadId);
+      });
+
+      elements.leadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const lead = selectedLead();
+        if (!lead) return;
+        setBusy(elements.saveLeadButton, true, 'Guardando…');
+        try {
+          await runUpdateLead({
+            id: lead.id,
+            status: elements.leadStatus.value,
+            owner: elements.leadOwner.value,
+            nextFollowUp: elements.leadFollowUp.value,
+            lastNote: elements.leadNote.value,
+            actor: state.data.contactEmail,
+          });
+          await refreshData(false);
+          showToast('Prospecto actualizado.');
+        } catch (error) {
+          showToast(messageOf(error), true);
+        } finally {
+          setBusy(elements.saveLeadButton, false, 'Guardar cambios');
+        }
+      });
+
+      elements.activityForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const lead = selectedLead();
+        if (!lead) return;
+        setBusy(elements.saveActivityButton, true, 'Registrando…');
+        try {
+          await runAddActivity({
+            leadId: lead.id,
+            type: elements.activityType.value,
+            details: elements.activityDetails.value,
+            actor: state.data.contactEmail,
+          });
+          elements.activityDetails.value = '';
+          await refreshData(false);
+          showToast('Actividad registrada.');
+        } catch (error) {
+          showToast(messageOf(error), true);
+        } finally {
+          setBusy(elements.saveActivityButton, false, 'Registrar actividad');
+        }
+      });
+
+      async function authenticate() {
+        if (!state.token) return;
+        setBusy(elements.loginButton, true, 'Verificando…');
+        try {
+          await refreshData(false);
+          sessionStorage.setItem('aiassistant_crm_token', state.token);
+          elements.loginView.hidden = true;
+          elements.appView.hidden = false;
+        } catch (error) {
+          elements.loginError.textContent = messageOf(error);
+          state.token = '';
+          sessionStorage.removeItem('aiassistant_crm_token');
+        } finally {
+          setBusy(elements.loginButton, false, 'Entrar al CRM');
+        }
+      }
+
+      async function refreshData(showConfirmation) {
+        elements.syncState.textContent = 'Sincronizando…';
+        state.data = await runGetDashboard();
+        renderAll();
+        elements.syncState.textContent = 'Actualizado ' + formatDateTime(state.data.generatedAt);
+        if (showConfirmation) showToast('CRM actualizado.');
+      }
+
+      function renderAll() {
+        const metrics = state.data.metrics;
+        elements.metricTotal.textContent = metrics.total;
+        elements.metricNew.textContent = metrics.newLeads;
+        elements.metricQualified.textContent = metrics.qualified;
+        elements.metricWon.textContent = metrics.won;
+        elements.metricConversion.textContent = metrics.conversion + '%';
+        elements.contactLine.innerHTML = 'Notificaciones a <a href="mailto:' + escapeHtml(state.data.contactEmail) + '">' + escapeHtml(state.data.contactEmail) + '</a>';
+        elements.sheetLink.href = state.data.spreadsheetUrl;
+
+        elements.statusFilter.innerHTML = '<option value="">Todos los estados</option>' + state.data.options.statuses.map((status) => '<option value="' + escapeHtml(status) + '">' + escapeHtml(status) + '</option>').join('');
+        elements.leadStatus.innerHTML = state.data.options.statuses.map((status) => '<option value="' + escapeHtml(status) + '">' + escapeHtml(status) + '</option>').join('');
+        elements.activityType.innerHTML = state.data.options.activityTypes.map((type) => '<option value="' + escapeHtml(type) + '">' + escapeHtml(type) + '</option>').join('');
+
+        renderLeadRows();
+        if (state.selectedId && selectedLead()) selectLead(state.selectedId);
+        else closeDetail();
+      }
+
+      function renderLeadRows() {
+        if (!state.data) return;
+        const query = elements.searchInput.value.trim().toLowerCase();
+        const status = elements.statusFilter.value;
+        const leads = state.data.leads.filter((lead) => {
+          const haystack = [lead.name, lead.company, lead.email, lead.source, lead.campaign].join(' ').toLowerCase();
+          return (!query || haystack.includes(query)) && (!status || lead.status === status);
+        });
+
+        elements.leadRows.innerHTML = leads.map((lead) => {
+          const selected = lead.id === state.selectedId ? ' class="selected"' : '';
+          return '<tr data-lead-id="' + escapeHtml(lead.id) + '"' + selected + '>' +
+            '<td><strong>' + escapeHtml(lead.name) + '</strong><small>' + escapeHtml(lead.email) + '</small></td>' +
+            '<td><strong>' + escapeHtml(lead.company) + '</strong><small>' + escapeHtml(lead.teamSize || 'Sin tamaño') + '</small></td>' +
+            '<td><span class="pill pill-' + slug(lead.status) + '">' + escapeHtml(lead.status) + '</span></td>' +
+            '<td><strong>' + escapeHtml(lead.source || 'Directo') + '</strong><small>' + escapeHtml(lead.campaign || lead.medium || '') + '</small></td>' +
+            '<td><strong>' + escapeHtml(lead.nextFollowUp ? formatDate(lead.nextFollowUp) : 'Sin fecha') + '</strong><small>' + escapeHtml(formatDate(lead.createdAt)) + '</small></td>' +
+            '</tr>';
+        }).join('');
+        elements.emptyState.hidden = leads.length > 0;
+      }
+
+      function selectLead(id) {
+        state.selectedId = id;
+        const lead = selectedLead();
+        if (!lead) return closeDetail();
+        elements.detailEmpty.hidden = true;
+        elements.detailContent.hidden = false;
+        elements.detailId.textContent = lead.id;
+        elements.detailName.textContent = lead.name;
+        elements.detailCompany.textContent = lead.company;
+        elements.leadStatus.value = lead.status;
+        elements.leadOwner.value = lead.owner || '';
+        elements.leadFollowUp.value = lead.nextFollowUp || '';
+        elements.leadNote.value = lead.lastNote || '';
+
+        elements.leadContext.innerHTML = [
+          ['Email', '<a href="mailto:' + escapeHtml(lead.email) + '">' + escapeHtml(lead.email) + '</a>'],
+          ['Equipo', escapeHtml(lead.teamSize || '—')],
+          ['Idioma', escapeHtml((lead.language || 'fr').toUpperCase())],
+          ['Fuente', escapeHtml([lead.source, lead.medium, lead.campaign].filter(Boolean).join(' / ') || 'Directo')],
+          ['Desafío', escapeHtml(lead.challenge || '—')],
+          ['Consentimiento', escapeHtml(lead.consent || '—')],
+        ].map(([term, value]) => '<div><dt>' + term + '</dt><dd>' + value + '</dd></div>').join('');
+
+        const activities = state.data.activities.filter((item) => item.leadId === lead.id);
+        elements.timeline.innerHTML = activities.length ? activities.map((item) =>
+          '<article class="activity"><strong>' + escapeHtml(item.type) + '</strong><p>' + escapeHtml(item.details) + '</p><small>' + escapeHtml(formatDateTime(item.timestamp)) + ' · ' + escapeHtml(item.actor || '') + '</small></article>'
+        ).join('') : '<p class="empty">Aún no hay actividades.</p>';
+        renderLeadRows();
+      }
+
+      function closeDetail() {
+        state.selectedId = '';
+        elements.detailEmpty.hidden = false;
+        elements.detailContent.hidden = true;
+      }
+
+      function selectedLead() {
+        return state.data && state.data.leads.find((lead) => lead.id === state.selectedId);
+      }
+
+      function logout() {
+        sessionStorage.removeItem('aiassistant_crm_token');
+        state.token = '';
+        state.data = null;
+        state.selectedId = '';
+        elements.tokenInput.value = '';
+        elements.appView.hidden = true;
+        elements.loginView.hidden = false;
+      }
+
+      function runGetDashboard() {
+        return new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getDashboardData(state.token));
+      }
+      function runUpdateLead(payload) {
+        return new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).updateLead(state.token, payload));
+      }
+      function runAddActivity(payload) {
+        return new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).addActivity(state.token, payload));
+      }
+
+      function setBusy(button, busy, label) {
+        button.disabled = busy;
+        button.textContent = label;
+      }
+
+      let toastTimer;
+      function showToast(message, bad) {
+        clearTimeout(toastTimer);
+        elements.toast.textContent = message;
+        elements.toast.classList.toggle('bad', Boolean(bad));
+        elements.toast.hidden = false;
+        toastTimer = setTimeout(() => { elements.toast.hidden = true; }, 3500);
+      }
+
+      function formatDate(value) {
+        if (!value) return '';
+        const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(value + 'T12:00:00') : new Date(value);
+        return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('es-CA', { year: 'numeric', month: 'short', day: 'numeric' }).format(date);
+      }
+      function formatDateTime(value) {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat('es-CA', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
+      }
+      function slug(value) {
+        return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-');
+      }
+      function messageOf(error) {
+        return error && error.message ? error.message : String(error || 'No se pudo completar la acción.');
+      }
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      if (state.token) authenticate();
+    </script>
+  </body>
+</html>

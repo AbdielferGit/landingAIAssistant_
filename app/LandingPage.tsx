@@ -6,8 +6,11 @@ import { useEffect, useState } from 'react';
 export type Locale = 'es' | 'en' | 'fr';
 
 type CampaignData = { source: string; medium: string; campaign: string };
+type FormState = 'idle' | 'sending' | 'sent' | 'error';
 
 const localePaths: Record<Locale, string> = { es: '/es/', en: '/en/', fr: '/' };
+const teamSizeValues = ['1–10', '11–50', '51–200', '200+'] as const;
+const crmEndpoint = process.env.NEXT_PUBLIC_CRM_ENDPOINT?.trim() ?? '';
 
 const content = {
   es: {
@@ -49,8 +52,9 @@ const content = {
     metrics: { recovered: 'Tiempo recuperado', hours: 'Horas', perWeek: 'por persona / semana', speed: 'Velocidad', cycle: 'ciclo de proceso', quality: 'Calidad', consistency: 'consistencia de entrega', adoption: 'Adopción', activeUse: 'uso activo del equipo', trust: 'Confianza', safeUse: 'uso seguro y responsable' },
     diagnosisKicker: 'Primer paso', diagnosisTitle: 'Descubre por dónde empezar.', diagnosisCopy: 'Cuéntanos qué está frenando a tu equipo. En una conversación breve identificaremos una primera oportunidad y el siguiente paso más útil.',
     promises: [['30 minutos', 'de conversación enfocada'], ['Una oportunidad', 'aterrizada a tu operación'], ['Sin compromiso', 'y sin discurso técnico']], sourceDetected: 'Fuente de campaña detectada:',
-    successLabel: 'Solicitud registrada', successTitle: 'Gracias. Ya tenemos el contexto inicial.', successCopy: 'En la versión publicada, este paso enviará el lead a tu correo o CRM.', sendAnother: 'Enviar otra respuesta',
-    formLabel: 'Diagnóstico inicial', formTitle: 'Completa tus datos', name: 'Nombre', namePlaceholder: 'Tu nombre', company: 'Empresa', companyPlaceholder: 'Nombre de la empresa', email: 'Email corporativo', emailPlaceholder: 'nombre@empresa.com', teamSize: 'Tamaño del equipo', select: 'Selecciona una opción', sizes: ['1–10 personas', '11–50 personas', '51–200 personas', 'Más de 200 personas'], challenge: '¿Qué te gustaría mejorar primero?', challengePlaceholder: 'Por ejemplo: reducir el tiempo que dedicamos a reportes semanales...', formSubmit: 'Solicitar diagnóstico', demoNote: 'Versión de prueba: el envío se simula y todavía no comparte tus datos.',
+    successLabel: 'Solicitud registrada', successTitle: 'Gracias. Ya tenemos el contexto inicial.', successCopy: 'Te contactaremos pronto para acordar el siguiente paso.', sendAnother: 'Enviar otra respuesta',
+    formLabel: 'Diagnóstico inicial', formTitle: 'Completa tus datos', name: 'Nombre', namePlaceholder: 'Tu nombre', company: 'Empresa', companyPlaceholder: 'Nombre de la empresa', email: 'Email corporativo', emailPlaceholder: 'nombre@empresa.com', teamSize: 'Tamaño del equipo', select: 'Selecciona una opción', sizes: ['1–10 personas', '11–50 personas', '51–200 personas', 'Más de 200 personas'], challenge: '¿Qué te gustaría mejorar primero?', challengePlaceholder: 'Por ejemplo: reducir el tiempo que dedicamos a reportes semanales...', formSubmit: 'Solicitar diagnóstico', demoNote: 'Los datos se guardan en nuestro CRM únicamente para responder a tu solicitud.',
+    sending: 'Enviando…', consent: 'Acepto que AiAssistant almacene estos datos para responder a mi solicitud.', formError: 'No pudimos registrar la solicitud. Revisa tu conexión e inténtalo de nuevo.', formUnavailable: 'El formulario se está terminando de configurar. Inténtalo de nuevo más tarde.',
     faqKicker: 'Preguntas frecuentes', faqTitle: 'Antes de dar el primer paso.', faqs: [
       ['¿Necesitamos tener experiencia previa con IA?', 'No. Partimos del nivel real de tu equipo y diseñamos una adopción gradual, con lenguaje claro y casos aplicados a su trabajo diario.'],
       ['¿Esto implica cambiar todas nuestras herramientas?', 'No necesariamente. Primero buscamos valor en los procesos y sistemas que ya utilizas. Solo recomendamos nuevas herramientas cuando aportan una mejora concreta.'],
@@ -98,8 +102,9 @@ const content = {
     metrics: { recovered: 'Time recovered', hours: 'Hours', perWeek: 'per person / week', speed: 'Speed', cycle: 'process cycle time', quality: 'Quality', consistency: 'delivery consistency', adoption: 'Adoption', activeUse: 'active team usage', trust: 'Confidence', safeUse: 'safe, responsible use' },
     diagnosisKicker: 'First step', diagnosisTitle: 'Discover where to begin.', diagnosisCopy: 'Tell us what is slowing your team down. In one focused conversation, we will identify an initial opportunity and the most useful next step.',
     promises: [['30 minutes', 'of focused conversation'], ['One opportunity', 'grounded in your operations'], ['No obligation', 'and no technical pitch']], sourceDetected: 'Campaign source detected:',
-    successLabel: 'Request recorded', successTitle: 'Thank you. We have the initial context.', successCopy: 'In the published version, this step will send the lead to your email or CRM.', sendAnother: 'Send another response',
-    formLabel: 'Initial assessment', formTitle: 'Tell us about yourself', name: 'Name', namePlaceholder: 'Your name', company: 'Company', companyPlaceholder: 'Company name', email: 'Work email', emailPlaceholder: 'name@company.com', teamSize: 'Team size', select: 'Select an option', sizes: ['1–10 people', '11–50 people', '51–200 people', 'More than 200 people'], challenge: 'What would you like to improve first?', challengePlaceholder: 'For example: reduce the time we spend on weekly reports...', formSubmit: 'Request an assessment', demoNote: 'Demo version: submission is simulated and your data is not shared yet.',
+    successLabel: 'Request recorded', successTitle: 'Thank you. We have the initial context.', successCopy: 'We will contact you shortly to agree on the next step.', sendAnother: 'Send another response',
+    formLabel: 'Initial assessment', formTitle: 'Tell us about yourself', name: 'Name', namePlaceholder: 'Your name', company: 'Company', companyPlaceholder: 'Company name', email: 'Work email', emailPlaceholder: 'name@company.com', teamSize: 'Team size', select: 'Select an option', sizes: ['1–10 people', '11–50 people', '51–200 people', 'More than 200 people'], challenge: 'What would you like to improve first?', challengePlaceholder: 'For example: reduce the time we spend on weekly reports...', formSubmit: 'Request an assessment', demoNote: 'Your data is stored in our CRM only so we can respond to your request.',
+    sending: 'Sending…', consent: 'I agree that AiAssistant may store this information to respond to my request.', formError: 'We could not record your request. Check your connection and try again.', formUnavailable: 'The form is still being configured. Please try again later.',
     faqKicker: 'Frequently asked questions', faqTitle: 'Before taking the first step.', faqs: [
       ['Do we need previous AI experience?', 'No. We start from your team’s actual level and design a gradual adoption path using clear language and cases drawn from everyday work.'],
       ['Will we need to replace all our tools?', 'Not necessarily. We first look for value in the processes and systems you already use. We only recommend new tools when they deliver a clear improvement.'],
@@ -147,8 +152,9 @@ const content = {
     metrics: { recovered: 'Temps récupéré', hours: 'Heures', perWeek: 'par personne / semaine', speed: 'Rapidité', cycle: 'durée du processus', quality: 'Qualité', consistency: 'régularité des livrables', adoption: 'Adoption', activeUse: 'usage actif de l’équipe', trust: 'Confiance', safeUse: 'usage sûr et responsable' },
     diagnosisKicker: 'Première étape', diagnosisTitle: 'Découvrez par où commencer.', diagnosisCopy: 'Dites-nous ce qui ralentit votre équipe. En un échange ciblé, nous identifierons une première opportunité et la prochaine étape la plus utile.',
     promises: [['30 minutes', 'd’échange ciblé'], ['Une opportunité', 'ancrée dans vos opérations'], ['Sans engagement', 'et sans discours technique']], sourceDetected: 'Source de campagne détectée :',
-    successLabel: 'Demande enregistrée', successTitle: 'Merci. Nous avons le contexte initial.', successCopy: 'Dans la version publiée, cette étape transmettra le contact à votre adresse courriel ou à votre CRM.', sendAnother: 'Envoyer une autre réponse',
-    formLabel: 'Diagnostic initial', formTitle: 'Parlez-nous de vous', name: 'Nom', namePlaceholder: 'Votre nom', company: 'Entreprise', companyPlaceholder: 'Nom de l’entreprise', email: 'Courriel professionnel', emailPlaceholder: 'nom@entreprise.com', teamSize: 'Taille de l’équipe', select: 'Sélectionnez une option', sizes: ['1–10 personnes', '11–50 personnes', '51–200 personnes', 'Plus de 200 personnes'], challenge: 'Que souhaitez-vous améliorer en premier ?', challengePlaceholder: 'Par exemple : réduire le temps consacré aux rapports hebdomadaires…', formSubmit: 'Demander un diagnostic', demoNote: 'Version de démonstration : l’envoi est simulé et vos données ne sont pas encore partagées.',
+    successLabel: 'Demande enregistrée', successTitle: 'Merci. Nous avons le contexte initial.', successCopy: 'Nous vous contacterons prochainement pour convenir de la suite.', sendAnother: 'Envoyer une autre réponse',
+    formLabel: 'Diagnostic initial', formTitle: 'Parlez-nous de vous', name: 'Nom', namePlaceholder: 'Votre nom', company: 'Entreprise', companyPlaceholder: 'Nom de l’entreprise', email: 'Courriel professionnel', emailPlaceholder: 'nom@entreprise.com', teamSize: 'Taille de l’équipe', select: 'Sélectionnez une option', sizes: ['1–10 personnes', '11–50 personnes', '51–200 personnes', 'Plus de 200 personnes'], challenge: 'Que souhaitez-vous améliorer en premier ?', challengePlaceholder: 'Par exemple : réduire le temps consacré aux rapports hebdomadaires…', formSubmit: 'Demander un diagnostic', demoNote: 'Vos données sont conservées dans notre CRM uniquement afin de répondre à votre demande.',
+    sending: 'Envoi…', consent: 'J’accepte qu’AiAssistant conserve ces renseignements afin de répondre à ma demande.', formError: 'Nous n’avons pas pu enregistrer votre demande. Vérifiez votre connexion et réessayez.', formUnavailable: 'Le formulaire est en cours de configuration. Veuillez réessayer plus tard.',
     faqKicker: 'Questions fréquentes', faqTitle: 'Avant de faire le premier pas.', faqs: [
       ['Devons-nous déjà connaître l’IA ?', 'Non. Nous partons du niveau réel de votre équipe et concevons une adoption progressive, avec un langage clair et des cas issus du travail quotidien.'],
       ['Faut-il remplacer tous nos outils ?', 'Pas nécessairement. Nous cherchons d’abord de la valeur dans les processus et systèmes que vous utilisez déjà. Nous ne recommandons de nouveaux outils que s’ils apportent une amélioration concrète.'],
@@ -161,7 +167,8 @@ const content = {
 
 export default function LandingPage({ locale }: { locale: Locale }) {
   const c = content[locale];
-  const [sent, setSent] = useState(false);
+  const [formState, setFormState] = useState<FormState>('idle');
+  const [formError, setFormError] = useState('');
   const [query, setQuery] = useState('');
   const [campaign, setCampaign] = useState<CampaignData>({ source: '', medium: '', campaign: '' });
 
@@ -177,9 +184,38 @@ export default function LandingPage({ locale }: { locale: Locale }) {
     return () => window.clearTimeout(timer);
   }, [locale]);
 
-  function submitLead(event: FormEvent<HTMLFormElement>) {
+  async function submitLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
+    const form = event.currentTarget;
+    setFormError('');
+
+    if (!crmEndpoint) {
+      setFormState('error');
+      setFormError(c.formUnavailable);
+      return;
+    }
+
+    setFormState('sending');
+    const data = new FormData(form);
+    const payload = Object.fromEntries(data.entries());
+    payload.landing_url = window.location.href;
+    payload.submitted_at = new Date().toISOString();
+
+    try {
+      await fetch(crmEndpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        credentials: 'omit',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+      form.reset();
+      setFormState('sent');
+    } catch {
+      setFormState('error');
+      setFormError(c.formError);
+    }
   }
 
   return (
@@ -243,7 +279,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
 
       <section className="diagnostic section-pad" id="diagnosis"><div className="shell diagnostic-wrap">
         <div className="diagnostic-copy"><p className="kicker">{c.diagnosisKicker}</p><h2>{c.diagnosisTitle}</h2><p>{c.diagnosisCopy}</p><div className="promise-list">{c.promises.map(([value, detail], index) => <div key={value}><span>0{index + 1}</span><p><strong>{value}</strong> {detail}</p></div>)}</div>{campaign.source && <div className="source-detected"><i /> {c.sourceDetected} <strong>{campaign.source}</strong></div>}</div>
-        <div className="form-card">{sent ? <div className="success-message" role="status" aria-live="polite"><span aria-hidden="true">✓</span><p>{c.successLabel}</p><h3>{c.successTitle}</h3><small>{c.successCopy}</small><button type="button" onClick={() => setSent(false)}>{c.sendAnother}</button></div> : <form onSubmit={submitLead}><div className="form-intro"><span>{c.formLabel}</span><strong>{c.formTitle}</strong></div><div className="field-row"><label>{c.name}<input name="name" type="text" placeholder={c.namePlaceholder} autoComplete="name" required /></label><label>{c.company}<input name="company" type="text" placeholder={c.companyPlaceholder} autoComplete="organization" required /></label></div><label>{c.email}<input name="email" type="email" placeholder={c.emailPlaceholder} autoComplete="email" required /></label><label>{c.teamSize}<select name="team_size" defaultValue="" required><option value="" disabled>{c.select}</option>{c.sizes.map((size) => <option key={size}>{size}</option>)}</select></label><label>{c.challenge}<textarea name="challenge" rows={4} placeholder={c.challengePlaceholder} required /></label><input type="hidden" name="utm_source" value={campaign.source} /><input type="hidden" name="utm_medium" value={campaign.medium} /><input type="hidden" name="utm_campaign" value={campaign.campaign} /><input type="hidden" name="language" value={locale} /><button className="button form-submit" type="submit">{c.formSubmit} <span>→</span></button><p className="form-note"><span aria-hidden="true">●</span> {c.demoNote}</p></form>}</div>
+        <div className="form-card">{formState === 'sent' ? <div className="success-message" role="status" aria-live="polite"><span aria-hidden="true">✓</span><p>{c.successLabel}</p><h3>{c.successTitle}</h3><small>{c.successCopy}</small><button type="button" onClick={() => setFormState('idle')}>{c.sendAnother}</button></div> : <form onSubmit={submitLead}><div className="form-intro"><span>{c.formLabel}</span><strong>{c.formTitle}</strong></div><div className="field-row"><label>{c.name}<input name="name" type="text" placeholder={c.namePlaceholder} autoComplete="name" required /></label><label>{c.company}<input name="company" type="text" placeholder={c.companyPlaceholder} autoComplete="organization" required /></label></div><label>{c.email}<input name="email" type="email" placeholder={c.emailPlaceholder} autoComplete="email" required /></label><label>{c.teamSize}<select name="team_size" defaultValue="" required><option value="" disabled>{c.select}</option>{c.sizes.map((size, index) => <option key={size} value={teamSizeValues[index]}>{size}</option>)}</select></label><label>{c.challenge}<textarea name="challenge" rows={4} placeholder={c.challengePlaceholder} required /></label><label className="consent-row"><input name="consent" type="checkbox" value="yes" required /><span>{c.consent}</span></label><label className="honeypot" aria-hidden="true">Website<input name="website" type="text" tabIndex={-1} autoComplete="off" /></label><input type="hidden" name="utm_source" value={campaign.source} /><input type="hidden" name="utm_medium" value={campaign.medium} /><input type="hidden" name="utm_campaign" value={campaign.campaign} /><input type="hidden" name="language" value={locale} /><button className="button form-submit" type="submit" disabled={formState === 'sending'}>{formState === 'sending' ? c.sending : c.formSubmit} <span>→</span></button>{formError && <p className="form-error" role="alert">{formError}</p>}<p className="form-note"><span aria-hidden="true">●</span> {c.demoNote}</p></form>}</div>
       </div></section>
 
       <section className="faq section-pad" id="questions"><div className="shell faq-grid"><div className="section-heading sticky-heading"><p className="kicker">{c.faqKicker}</p><h2>{c.faqTitle}</h2></div><div className="faq-list">{c.faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{question}</span><i aria-hidden="true">+</i></summary><p>{answer}</p></details>)}</div></div></section>
