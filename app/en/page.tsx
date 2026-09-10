@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'We guide your company through the practical, responsible adoption of artificial intelligence.',
   alternates: {
     canonical: '/en/',
-    languages: { es: '/', en: '/en/', fr: '/fr/' },
+    languages: { es: '/es/', en: '/en/', fr: '/', 'x-default': '/' },
   },
   openGraph: {
     title: 'AI that works with your team.',

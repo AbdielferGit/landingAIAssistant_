@@ -7,7 +7,7 @@ export type Locale = 'es' | 'en' | 'fr';
 
 type CampaignData = { source: string; medium: string; campaign: string };
 
-const localePaths: Record<Locale, string> = { es: '/', en: '/en/', fr: '/fr/' };
+const localePaths: Record<Locale, string> = { es: '/es/', en: '/en/', fr: '/' };
 
 const content = {
   es: {

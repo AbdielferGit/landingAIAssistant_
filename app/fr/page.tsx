@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: 'AiAssistant — Adoption de l’IA en entreprise',
   description: 'Nous accompagnons votre entreprise dans l’adoption pratique et responsable de l’intelligence artificielle.',
   alternates: {
-    canonical: '/fr/',
-    languages: { es: '/', en: '/en/', fr: '/fr/' },
+    canonical: '/',
+    languages: { es: '/es/', en: '/en/', fr: '/', 'x-default': '/' },
   },
   openGraph: {
     title: 'Une IA qui travaille avec votre équipe.',

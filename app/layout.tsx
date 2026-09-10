@@ -16,25 +16,25 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'AiAssistant — Adopción de IA para empresas',
-  description: 'Acompañamos a tu empresa en la adopción práctica y responsable de inteligencia artificial.',
-  keywords: ['adopción de IA', 'inteligencia artificial para empresas', 'consultoría IA', 'automatización de procesos'],
+  title: 'AiAssistant — Adoption de l’IA en entreprise',
+  description: 'Nous accompagnons votre entreprise dans l’adoption pratique et responsable de l’intelligence artificielle.',
+  keywords: ['adoption de l’IA', 'intelligence artificielle en entreprise', 'conseil en IA', 'automatisation des processus'],
   alternates: {
     canonical: '/',
-    languages: { es: '/', en: '/en/', fr: '/fr/' },
+    languages: { es: '/es/', en: '/en/', fr: '/', 'x-default': '/' },
   },
   openGraph: {
-    title: 'IA que trabaja con tu equipo.',
-    description: 'Adopción práctica. Resultados medibles.',
+    title: 'Une IA qui travaille avec votre équipe.',
+    description: 'Adoption concrète. Résultats mesurables.',
     type: 'website',
-    locale: 'es_ES',
-    alternateLocale: ['en_US', 'fr_CA'],
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AiAssistant — IA que trabaja con tu equipo' }],
+    locale: 'fr_CA',
+    alternateLocale: ['en_US', 'es_ES'],
+    images: [{ url: '/og.png', width: 1730, height: 909, alt: 'AiAssistant — Une IA qui travaille avec votre équipe' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IA que trabaja con tu equipo.',
-    description: 'Adopción práctica. Resultados medibles.',
+    title: 'Une IA qui travaille avec votre équipe.',
+    description: 'Adoption concrète. Résultats mesurables.',
     images: ['/og.png'],
   },
 };
@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

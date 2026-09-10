@@ -4,9 +4,10 @@ Landing page trilingüe para AiAssistant, creada para campañas publicitarias y 
 
 ## Idiomas
 
-- Español: `/`
+- Français: `/`
 - English: `/en/`
-- Français: `/fr/`
+- Español: `/es/`
+- Ancienne URL française conservée: `/fr/`
 
 ## Desarrollo
 
