@@ -40,6 +40,8 @@ function doPost(event) {
     const result = withScriptLock_(function () {
       const leadId = createId_('LEAD');
       const now = new Date();
+      const appointmentDate = parseAppointmentDate_(lead.appointmentDate);
+      const appointmentNote = appointmentNote_(lead);
       appendLead_([
         leadId,
         now,
@@ -50,23 +52,23 @@ function doPost(event) {
         lead.teamSize,
         lead.challenge,
         lead.language,
-        'Nuevo',
+        'Calificado',
         '',
-        '',
+        appointmentDate,
         lead.source,
         lead.medium,
         lead.campaign,
         lead.landingUrl,
         lead.consent ? 'Sí' : 'No',
-        '',
+        appointmentNote,
       ]);
 
       appendActivity_([
         createId_('ACT'),
         leadId,
         now,
-        'Nota',
-        'Registro recibido desde la landing page',
+        'Reunión',
+        appointmentNote,
         'Landing page',
       ]);
 
@@ -273,7 +275,10 @@ function validatePublicLead_(payload) {
     source: clean_(payload.utm_source || payload.source, 160),
     medium: clean_(payload.utm_medium || payload.medium, 160),
     campaign: clean_(payload.utm_campaign || payload.campaign, 200),
+    content: clean_(payload.utm_content || payload.content, 200),
     landingUrl: clean_(payload.landing_url || payload.landingUrl, 600),
+    appointmentDate: normalizeAppointmentDate_(payload.appointment_date || payload.appointmentDate),
+    appointmentTime: normalizeAppointmentTime_(payload.appointment_time || payload.appointmentTime),
     consent: isTrue_(payload.consent),
   };
 
@@ -285,6 +290,9 @@ function validatePublicLead_(payload) {
   }
   if (!lead.teamSize) {
     throw new Error('Selecciona el tamaño del equipo.');
+  }
+  if (!lead.appointmentDate || !lead.appointmentTime) {
+    throw new Error('Selecciona una fecha y hora para la cita.');
   }
   if (!lead.consent) {
     throw new Error('Se requiere consentimiento para registrar la solicitud.');
@@ -306,6 +314,33 @@ function normalizeTeamSize_(value) {
 function normalizeLanguage_(value) {
   const language = clean_(value, 10).toLowerCase();
   return ['fr', 'en', 'es'].indexOf(language) >= 0 ? language : 'fr';
+}
+
+function normalizeAppointmentDate_(value) {
+  const text = clean_(value, 20);
+  if (!text) return '';
+  parseAppointmentDate_(text);
+  return text;
+}
+
+function normalizeAppointmentTime_(value) {
+  const time = clean_(value, 10);
+  const available = ['09:00', '10:30', '13:30', '15:00', '16:30'];
+  if (!time) return '';
+  if (available.indexOf(time) < 0) {
+    throw new Error('La hora seleccionada no está disponible.');
+  }
+  return time;
+}
+
+function appointmentNote_(lead) {
+  const source = [lead.source, lead.medium, lead.campaign].filter(Boolean).join(' / ') || 'Directo';
+  const lines = [
+    'Cita solicitada para ' + lead.appointmentDate + ' a las ' + lead.appointmentTime + ' (America/Toronto). Pendiente de confirmación.',
+    'Fuente: ' + source,
+  ];
+  if (lead.content) lines.push('Contenido: ' + lead.content);
+  return lines.join('\n');
 }
 
 function appendLead_(row) {
@@ -434,17 +469,21 @@ function withScriptLock_(callback) {
 
 function sendLeadNotification_(lead, leadId, createdAt) {
   const source = [lead.source, lead.medium, lead.campaign].filter(Boolean).join(' / ') || 'Directo';
-  const subject = 'Nuevo prospecto AiAssistant: ' + lead.company;
+  const subject = 'Nueva cita AiAssistant: ' + lead.company + ' · ' + lead.appointmentDate;
   const body = [
-    'Nuevo prospecto registrado',
+    'Nueva solicitud de cita registrada',
     '',
     'ID: ' + leadId,
+    'Fecha de registro: ' + iso_(createdAt),
     'Nombre: ' + lead.name,
     'Empresa: ' + lead.company,
     'Email: ' + lead.email,
     'Tamaño del equipo: ' + lead.teamSize,
     'Idioma: ' + lead.language,
     'Fuente: ' + source,
+    'Contenido: ' + (lead.content || 'No identificado'),
+    'Cita solicitada: ' + lead.appointmentDate + ' a las ' + lead.appointmentTime + ' (hora de Montreal)',
+    'Estado: pendiente de confirmación',
     '',
     'Desafío:',
     lead.challenge,
@@ -452,7 +491,7 @@ function sendLeadNotification_(lead, leadId, createdAt) {
 
   const html = [
     '<div style="font-family:Arial,sans-serif;color:#1f2937;line-height:1.55">',
-    '<h2 style="margin:0 0 16px">Nuevo prospecto AiAssistant</h2>',
+    '<h2 style="margin:0 0 16px">Nueva solicitud de cita AiAssistant</h2>',
     '<p><strong>ID:</strong> ' + escapeHtml_(leadId) + '<br>',
     '<strong>Fecha:</strong> ' + escapeHtml_(iso_(createdAt)) + '<br>',
     '<strong>Nombre:</strong> ' + escapeHtml_(lead.name) + '<br>',
@@ -460,7 +499,9 @@ function sendLeadNotification_(lead, leadId, createdAt) {
     '<strong>Email:</strong> <a href="mailto:' + escapeHtml_(lead.email) + '">' + escapeHtml_(lead.email) + '</a><br>',
     '<strong>Tamaño del equipo:</strong> ' + escapeHtml_(lead.teamSize) + '<br>',
     '<strong>Idioma:</strong> ' + escapeHtml_(lead.language) + '<br>',
-    '<strong>Fuente:</strong> ' + escapeHtml_(source) + '</p>',
+    '<strong>Fuente:</strong> ' + escapeHtml_(source) + '<br>',
+    '<strong>Contenido:</strong> ' + escapeHtml_(lead.content || 'No identificado') + '</p>',
+    '<p style="padding:14px 16px;background:#f0f3ff;border-radius:10px"><strong>Cita solicitada</strong><br>' + escapeHtml_(lead.appointmentDate) + ' a las ' + escapeHtml_(lead.appointmentTime) + ' (hora de Montreal)<br><em>Pendiente de confirmación</em></p>',
     '<p><strong>Desafío</strong><br>' + escapeHtml_(lead.challenge).replace(/\n/g, '<br>') + '</p>',
     '</div>',
   ].join('');
@@ -476,7 +517,7 @@ function sendLeadNotification_(lead, leadId, createdAt) {
 }
 
 function duplicateKey_(lead) {
-  const raw = [lead.email, lead.company, lead.challenge.slice(0, 200)].join('|').toLowerCase();
+  const raw = [lead.email, lead.company, lead.appointmentDate, lead.appointmentTime, lead.challenge.slice(0, 200)].join('|').toLowerCase();
   const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, raw, Utilities.Charset.UTF_8);
   return 'lead-' + Utilities.base64EncodeWebSafe(digest).slice(0, 40);
 }
@@ -498,6 +539,30 @@ function parseDateInput_(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
   if (!match) throw new Error('La fecha de seguimiento no es válida.');
   return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12, 0, 0);
+}
+
+function parseAppointmentDate_(value) {
+  const text = clean_(value, 20);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  if (!match) throw new Error('La fecha de la cita no es válida.');
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const appointment = new Date(year, month - 1, day, 12, 0, 0);
+  if (appointment.getFullYear() !== year || appointment.getMonth() !== month - 1 || appointment.getDate() !== day) {
+    throw new Error('La fecha de la cita no es válida.');
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const latest = new Date(today);
+  latest.setDate(latest.getDate() + 90);
+  latest.setHours(23, 59, 59, 999);
+  if (appointment <= today || appointment > latest) {
+    throw new Error('La fecha de la cita debe estar entre mañana y los próximos 90 días.');
+  }
+  return appointment;
 }
 
 function dateInput_(value) {
@@ -537,6 +602,10 @@ function publicError_(error) {
     'Faltan datos obligatorios.',
     'El correo no es válido.',
     'Selecciona el tamaño del equipo.',
+    'Selecciona una fecha y hora para la cita.',
+    'La fecha de la cita no es válida.',
+    'La fecha de la cita debe estar entre mañana y los próximos 90 días.',
+    'La hora seleccionada no está disponible.',
     'Se requiere consentimiento para registrar la solicitud.',
     'El CRM todavía no está configurado. Ejecuta initializeCrm.',
   ];

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <rect width="1080" height="1350" fill="#17242C"/>
+  <path d="M730 0H1080V470C980 430 875 354 820 264C775 190 748 102 730 0Z" fill="#1F48D6"/>
+  <circle cx="912" cy="192" r="102" fill="#C9F36B"/>
+  <g transform="translate(84 78)">
+    <rect width="48" height="48" rx="14" fill="#C9F36B" transform="rotate(-7 24 24)"/>
+    <rect x="15" y="13" width="18" height="6" rx="3" fill="#17242C"/>
+    <rect x="15" y="29" width="18" height="6" rx="3" fill="#17242C"/>
+    <text x="66" y="35" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="700" fill="white">AiAssistant <tspan font-size="18" font-weight="500" fill="#AFBDC5">by InnovaMontreal</tspan></text>
+  </g>
+  <text x="84" y="400" font-family="Arial,Helvetica,sans-serif" font-size="43" font-weight="700" letter-spacing="3" fill="#C9F36B">COMMENCER CONCRÈTEMENT</text>
+  <text x="84" y="555" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="800" letter-spacing="-5" fill="white">
+    <tspan x="84" dy="0">Où votre équipe</tspan><tspan x="84" dy="108">perd-elle</tspan><tspan x="84" dy="108">du temps ?</tspan>
+  </text>
+  <line x1="84" y1="930" x2="996" y2="930" stroke="#45545D" stroke-width="2"/>
+  <text x="84" y="1025" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="500" fill="#CFD8DD">
+    <tspan x="84" dy="0">Un processus concret.</tspan><tspan x="84" dy="58">Un pilote mesurable.</tspan>
+  </text>
+  <text x="84" y="1255" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" fill="#C9F36B">getaiassistant.app  →</text>
+</svg>

@@ -27,6 +27,10 @@ El repositorio incluye un CRM ligero basado en Google Sheets y Google Apps Scrip
 
 La implementación y las instrucciones están en [`crm/`](crm/README.md).
 
+## Embudo Facebook e Instagram
+
+`marketing/meta/` contiene el público objetivo, la estructura de campañas, doce publicaciones en francés e inglés, el calendario de cuatro semanas, enlaces UTM y seis creativos 4:5 en SVG y PNG. Los enlaces conservan la atribución hasta el CRM.
+
 ## Generar la versión estática para Bluehost
 
 ```bash

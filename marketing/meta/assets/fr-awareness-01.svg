@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <rect width="1080" height="1350" fill="#F5F6F2"/>
+  <circle cx="930" cy="175" r="260" fill="#C9F36B" opacity=".55"/>
+  <circle cx="160" cy="1210" r="360" fill="#DDE5FF"/>
+  <g transform="translate(84 78)">
+    <rect width="48" height="48" rx="14" fill="#1F48D6" transform="rotate(-7 24 24)"/>
+    <rect x="15" y="13" width="18" height="6" rx="3" fill="white"/>
+    <rect x="15" y="29" width="18" height="6" rx="3" fill="white"/>
+    <text x="66" y="35" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="700" fill="#15232C">AiAssistant <tspan font-size="18" font-weight="500" fill="#697780">by InnovaMontreal</tspan></text>
+  </g>
+  <text x="84" y="380" font-family="Arial,Helvetica,sans-serif" font-size="44" font-weight="700" letter-spacing="3" fill="#1F48D6">ADOPTION DE L’IA</text>
+  <text x="84" y="515" font-family="Arial,Helvetica,sans-serif" font-size="94" font-weight="800" letter-spacing="-5" fill="#15232C">
+    <tspan x="84" dy="0">L’IA n’est pas</tspan><tspan x="84" dy="108">un projet d’outil.</tspan>
+  </text>
+  <text x="84" y="800" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="650" letter-spacing="-2" fill="#1F48D6">
+    <tspan x="84" dy="0">C’est un projet</tspan><tspan x="84" dy="72">d’adoption.</tspan>
+  </text>
+  <g transform="translate(84 1125)">
+    <rect width="510" height="92" rx="18" fill="#1F48D6"/>
+    <text x="36" y="58" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="700" fill="white">Découvrez par où commencer →</text>
+  </g>
+</svg>

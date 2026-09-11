@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AiAssistant social asset renderer</title>
+    <style>
+      html, body { width: 1080px; min-width: 1080px; margin: 0; padding: 0; overflow: hidden; background: #fff; }
+      img { display: block; width: 1080px; height: 1350px; object-fit: contain; }
+    </style>
+  </head>
+  <body>
+    <img id="asset" width="1080" height="1350" alt="">
+    <script>
+      const requestedAsset = new URLSearchParams(location.search).get('asset') || 'fr-awareness-01';
+      const requestedOffset = Number(new URLSearchParams(location.search).get('offset') || 0);
+      const asset = document.getElementById('asset');
+      asset.src = requestedAsset + '.svg';
+      asset.style.transform = `translateY(-${Math.max(0, requestedOffset)}px)`;
+    </script>
+  </body>
+</html>

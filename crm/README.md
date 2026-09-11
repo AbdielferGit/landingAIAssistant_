@@ -28,3 +28,7 @@ El CRM usa una Google Sheet como base de datos y un proyecto de Google Apps Scri
 - La landing incluye un campo señuelo y el backend limita duplicados recientes.
 - El endpoint de captación es público por diseño. Para campañas con alto volumen se recomienda añadir Turnstile o reCAPTCHA.
 - El panel no permite eliminar prospectos; las actualizaciones relevantes se registran en `Actividad`.
+
+## Citas y atribución
+
+La landing solicita una fecha y hora preferidas en la zona `America/Toronto`. El backend crea el prospecto como `Calificado`, usa la fecha como próximo seguimiento, registra una actividad `Reunión` y conserva `utm_source`, `utm_medium`, `utm_campaign` y `utm_content` en el historial. La disponibilidad se confirma manualmente por correo; no se presenta como una reserva instantánea.

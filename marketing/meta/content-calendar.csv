@@ -1,0 +1,14 @@
+week,day,stage,language,channel,format,post_id,goal,utm_content
+1,Monday,Awareness,FR,Instagram,Reel,FR01,Introduce adoption problem,fr-reel-01
+1,Wednesday,Awareness,FR,Facebook,Carousel,FR02,Generate problem recognition,fr-carousel-02
+1,Friday,Awareness,EN,Instagram,Reel,EN01,Reach anglophone decision-makers,en-reel-01
+2,Monday,Awareness,FR,Facebook,Static,FR03,Reframe AI adoption,fr-static-03
+2,Wednesday,Consideration,FR,Instagram,Reel,FR04,Show process-first approach,fr-reel-04
+2,Friday,Consideration,EN,Facebook,Carousel,EN02,Generate qualified visits,en-carousel-02
+3,Monday,Consideration,FR,Instagram,Carousel,FR05,Explain the method,fr-carousel-05
+3,Wednesday,Consideration,FR,Facebook,Reel,FR06,Answer data objection,fr-reel-06
+3,Friday,Consideration,EN,Instagram,Reel,EN03,Show practical workflow,en-reel-03
+4,Monday,Conversion,FR,Instagram,Static,FR07,Request assessment,fr-static-07
+4,Wednesday,Conversion,FR,Facebook,Carousel,FR08,Clarify assessment value,fr-carousel-08
+4,Friday,Conversion,EN,Facebook,Static,EN04,Request assessment,en-static-04
+
