@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3001';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getaiassistant.app';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
