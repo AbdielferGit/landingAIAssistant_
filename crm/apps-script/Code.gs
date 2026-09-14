@@ -4,6 +4,7 @@ const CRM = Object.freeze({
     spreadsheetId: 'CRM_SPREADSHEET_ID',
     contactEmail: 'CRM_CONTACT_EMAIL',
     adminToken: 'CRM_ADMIN_TOKEN',
+    leadsSheetName: 'CRM_LEADS_SHEET_NAME',
   }),
   statuses: Object.freeze(['Nuevo', 'Contactado', 'Calificado', 'Propuesta', 'Ganado', 'Perdido']),
   activityTypes: Object.freeze(['Nota', 'Correo', 'Llamada', 'Reunión', 'Cambio de estado']),
@@ -127,7 +128,7 @@ function getDashboardData(adminToken) {
   assertAdmin_(adminToken);
 
   const spreadsheet = getSpreadsheet_();
-  const leadsSheet = spreadsheet.getSheetByName(CRM.sheets.leads);
+  const leadsSheet = spreadsheet.getSheetByName(getLeadsSheetName_());
   const activitySheet = spreadsheet.getSheetByName(CRM.sheets.activity);
   const leads = readRows_(leadsSheet, CRM.leadColumns, CRM.maxLeads)
     .filter(function (row) { return row[0]; })
@@ -177,7 +178,7 @@ function updateLead(adminToken, input) {
   }
 
   return withScriptLock_(function () {
-    const sheet = getSpreadsheet_().getSheetByName(CRM.sheets.leads);
+    const sheet = getSpreadsheet_().getSheetByName(getLeadsSheetName_());
     const rowNumber = findRowById_(sheet, input.id);
     const range = sheet.getRange(rowNumber, 1, 1, CRM.leadColumns);
     const values = range.getValues()[0];
@@ -237,7 +238,7 @@ function addActivity(adminToken, input) {
 
   return withScriptLock_(function () {
     const spreadsheet = getSpreadsheet_();
-    findRowById_(spreadsheet.getSheetByName(CRM.sheets.leads), input.leadId);
+    findRowById_(spreadsheet.getSheetByName(getLeadsSheetName_()), input.leadId);
     const row = [
       createId_('ACT'),
       clean_(input.leadId, 80),
@@ -276,6 +277,7 @@ function validatePublicLead_(payload) {
     medium: clean_(payload.utm_medium || payload.medium, 160),
     campaign: clean_(payload.utm_campaign || payload.campaign, 200),
     content: clean_(payload.utm_content || payload.content, 200),
+    offer: normalizeOffer_(payload.offer),
     landingUrl: clean_(payload.landing_url || payload.landingUrl, 600),
     appointmentDate: normalizeAppointmentDate_(payload.appointment_date || payload.appointmentDate),
     appointmentTime: normalizeAppointmentTime_(payload.appointment_time || payload.appointmentTime),
@@ -316,6 +318,11 @@ function normalizeLanguage_(value) {
   return ['fr', 'en', 'es'].indexOf(language) >= 0 ? language : 'fr';
 }
 
+function normalizeOffer_(value) {
+  const offer = clean_(value, 80).toLowerCase();
+  return offer === 'ai-ready-website' ? 'ai-ready-website' : 'ai-adoption';
+}
+
 function normalizeAppointmentDate_(value) {
   const text = clean_(value, 20);
   if (!text) return '';
@@ -335,7 +342,9 @@ function normalizeAppointmentTime_(value) {
 
 function appointmentNote_(lead) {
   const source = [lead.source, lead.medium, lead.campaign].filter(Boolean).join(' / ') || 'Directo';
+  const offer = lead.offer === 'ai-ready-website' ? 'Sitio web preparado para IA' : 'Adopción de IA';
   const lines = [
+    'Servicio: ' + offer,
     'Cita solicitada para ' + lead.appointmentDate + ' a las ' + lead.appointmentTime + ' (America/Toronto). Pendiente de confirmación.',
     'Fuente: ' + source,
   ];
@@ -344,7 +353,7 @@ function appointmentNote_(lead) {
 }
 
 function appendLead_(row) {
-  const sheet = getSpreadsheet_().getSheetByName(CRM.sheets.leads);
+  const sheet = getSpreadsheet_().getSheetByName(getLeadsSheetName_());
   appendTemplateRow_(sheet, row, CRM.leadColumns);
 }
 
@@ -431,11 +440,16 @@ function getContactEmail_() {
   return email;
 }
 
+function getLeadsSheetName_() {
+  return PropertiesService.getScriptProperties().getProperty(CRM.properties.leadsSheetName) || CRM.sheets.leads;
+}
+
 function validateWorkbook_(spreadsheet) {
-  const leads = spreadsheet.getSheetByName(CRM.sheets.leads);
+  const leadsSheetName = getLeadsSheetName_();
+  const leads = spreadsheet.getSheetByName(leadsSheetName);
   const activity = spreadsheet.getSheetByName(CRM.sheets.activity);
   if (!leads || !activity) {
-    throw new Error('La hoja debe contener las pestañas Prospectos y Actividad.');
+    throw new Error('La hoja debe contener las pestañas ' + leadsSheetName + ' y Actividad.');
   }
 }
 
@@ -469,7 +483,8 @@ function withScriptLock_(callback) {
 
 function sendLeadNotification_(lead, leadId, createdAt) {
   const source = [lead.source, lead.medium, lead.campaign].filter(Boolean).join(' / ') || 'Directo';
-  const subject = 'Nueva cita AiAssistant: ' + lead.company + ' · ' + lead.appointmentDate;
+  const offer = lead.offer === 'ai-ready-website' ? 'Sitio web preparado para IA' : 'Adopción de IA';
+  const subject = 'Nueva cita AiAssistant · ' + offer + ': ' + lead.company + ' · ' + lead.appointmentDate;
   const body = [
     'Nueva solicitud de cita registrada',
     '',
@@ -480,6 +495,7 @@ function sendLeadNotification_(lead, leadId, createdAt) {
     'Email: ' + lead.email,
     'Tamaño del equipo: ' + lead.teamSize,
     'Idioma: ' + lead.language,
+    'Servicio: ' + offer,
     'Fuente: ' + source,
     'Contenido: ' + (lead.content || 'No identificado'),
     'Cita solicitada: ' + lead.appointmentDate + ' a las ' + lead.appointmentTime + ' (hora de Montreal)',
@@ -499,6 +515,7 @@ function sendLeadNotification_(lead, leadId, createdAt) {
     '<strong>Email:</strong> <a href="mailto:' + escapeHtml_(lead.email) + '">' + escapeHtml_(lead.email) + '</a><br>',
     '<strong>Tamaño del equipo:</strong> ' + escapeHtml_(lead.teamSize) + '<br>',
     '<strong>Idioma:</strong> ' + escapeHtml_(lead.language) + '<br>',
+    '<strong>Servicio:</strong> ' + escapeHtml_(offer) + '<br>',
     '<strong>Fuente:</strong> ' + escapeHtml_(source) + '<br>',
     '<strong>Contenido:</strong> ' + escapeHtml_(lead.content || 'No identificado') + '</p>',
     '<p style="padding:14px 16px;background:#f0f3ff;border-radius:10px"><strong>Cita solicitada</strong><br>' + escapeHtml_(lead.appointmentDate) + ' a las ' + escapeHtml_(lead.appointmentTime) + ' (hora de Montreal)<br><em>Pendiente de confirmación</em></p>',
@@ -517,7 +534,7 @@ function sendLeadNotification_(lead, leadId, createdAt) {
 }
 
 function duplicateKey_(lead) {
-  const raw = [lead.email, lead.company, lead.appointmentDate, lead.appointmentTime, lead.challenge.slice(0, 200)].join('|').toLowerCase();
+  const raw = [lead.email, lead.company, lead.offer, lead.appointmentDate, lead.appointmentTime, lead.challenge.slice(0, 200)].join('|').toLowerCase();
   const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, raw, Utilities.Charset.UTF_8);
   return 'lead-' + Utilities.base64EncodeWebSafe(digest).slice(0, 40);
 }

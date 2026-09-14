@@ -2,15 +2,18 @@ import fs from "node:fs/promises";
 import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
 const outputDir = new URL("../outputs/01a07e5c-aae9-7911-9fc1-3b0a85c9d262/", import.meta.url);
-const outputPath = new URL("AiAssistant-CRM.xlsx", outputDir);
-const previewDir = new URL("previews/", outputDir);
+const websiteCrm = process.argv.includes("--websites");
+const outputPath = new URL(websiteCrm ? "AiAssistant-CRM-Sitios-Web.xlsx" : "AiAssistant-CRM.xlsx", outputDir);
+const previewDir = new URL(websiteCrm ? "previews-websites/" : "previews/", outputDir);
+const leadSheetName = websiteCrm ? "Clientes" : "Prospectos";
+const leadLabel = websiteCrm ? "clientes" : "prospectos";
 
 await fs.mkdir(outputDir, { recursive: true });
 await fs.mkdir(previewDir, { recursive: true });
 
 const workbook = Workbook.create();
 const dashboard = workbook.worksheets.add("Panel");
-const leads = workbook.worksheets.add("Prospectos");
+const leads = workbook.worksheets.add(leadSheetName);
 const activity = workbook.worksheets.add("Actividad");
 
 const font = "Arial";
@@ -32,12 +35,12 @@ dashboard.tabColor = brand;
 dashboard.getRange("A2:L2").format.borders = {
   bottom: { style: "thin", color: rule },
 };
-dashboard.getRange("A2").values = [["AiAssistant CRM"]];
+dashboard.getRange("A2").values = [[websiteCrm ? "AiAssistant CRM — Sitios web" : "AiAssistant CRM"]];
 dashboard.getRange("A2").format.font = { name: font, size: 16, bold: true, color: ink };
-dashboard.getRange("A3").values = [["Seguimiento de prospectos y del pipeline comercial"]];
+dashboard.getRange("A3").values = [[websiteCrm ? "Clientes y oportunidades para proyectos de sitios web" : "Seguimiento de prospectos y del pipeline comercial"]];
 dashboard.getRange("A3").format.font = { name: font, size: 10, italic: true, color: muted };
 
-const kpiLabels = [["Total de prospectos", "Nuevos", "Contactados", "Calificados", "Ganados", "Conversión"]];
+const kpiLabels = [[`Total de ${leadLabel}`, "Nuevos", "Contactados", "Calificados", "Ganados", "Conversión"]];
 dashboard.getRange("A5:L5").format.font = { name: font, size: 10, bold: true, color: muted };
 dashboard.getRange("A5:B5").values = [[kpiLabels[0][0], ""]];
 dashboard.getRange("C5:D5").values = [[kpiLabels[0][1], ""]];
@@ -56,18 +59,18 @@ for (const block of kpiBlocks) {
   };
 }
 
-dashboard.getRange("A6").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\")"]];
-dashboard.getRange("C6").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,\"Nuevo\")"]];
-dashboard.getRange("E6").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,\"Contactado\")"]];
-dashboard.getRange("G6").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,\"Calificado\")"]];
-dashboard.getRange("I6").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,\"Ganado\")"]];
+dashboard.getRange("A6").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>")`]];
+dashboard.getRange("C6").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,"Nuevo")`]];
+dashboard.getRange("E6").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,"Contactado")`]];
+dashboard.getRange("G6").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,"Calificado")`]];
+dashboard.getRange("I6").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,"Ganado")`]];
 dashboard.getRange("K6").formulas = [["=IF(A6=0,0,I6/A6)"]];
 dashboard.getRange("A6:K6").format.font = { name: font, size: 16, bold: true, color: ink };
 dashboard.getRange("K6").format.numberFormat = "0%";
 
-dashboard.getRange("A10:B10").values = [["Estado", "Prospectos"]];
+dashboard.getRange("A10:B10").values = [["Estado", websiteCrm ? "Clientes" : "Prospectos"]];
 dashboard.getRange("A11:A16").values = [["Nuevo"], ["Contactado"], ["Calificado"], ["Propuesta"], ["Ganado"], ["Perdido"]];
-dashboard.getRange("B11").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,A11)"]];
+dashboard.getRange("B11").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,A11)`]];
 dashboard.getRange("B11:B16").fillDown();
 dashboard.getRange("A10:B10").format = {
   fill: headerFill,
@@ -84,13 +87,13 @@ dashboard.getRange("B11:B16").format.numberFormat = "#,##0";
 
 dashboard.getRange("D10:F10").values = [["Seguimiento", "Valor", "Definición"]];
 dashboard.getRange("D11:F13").values = [
-  ["Por contactar", null, "Prospectos con estado Nuevo"],
+  ["Por contactar", null, `${websiteCrm ? "Clientes" : "Prospectos"} con estado Nuevo`],
   ["Seguimientos vencidos", null, "Fecha alcanzada, excepto Ganado/Perdido"],
-  ["Con fuente publicitaria", null, "Prospectos con una fuente UTM"],
+  ["Con fuente publicitaria", null, `${websiteCrm ? "Clientes" : "Prospectos"} con una fuente UTM`],
 ];
-dashboard.getRange("E11").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$J$2:$J$1001,\"Nuevo\")"]];
-dashboard.getRange("E12").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$L$2:$L$1001,\">0\",Prospectos!$L$2:$L$1001,\"<=\"&TODAY(),Prospectos!$J$2:$J$1001,\"<>Ganado\",Prospectos!$J$2:$J$1001,\"<>Perdido\")"]];
-dashboard.getRange("E13").formulas = [["=COUNTIFS(Prospectos!$A$2:$A$1001,\"<>\",Prospectos!$M$2:$M$1001,\"<>\")"]];
+dashboard.getRange("E11").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$J$2:$J$1001,"Nuevo")`]];
+dashboard.getRange("E12").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$L$2:$L$1001,">0",${leadSheetName}!$L$2:$L$1001,"<="&TODAY(),${leadSheetName}!$J$2:$J$1001,"<>Ganado",${leadSheetName}!$J$2:$J$1001,"<>Perdido")`]];
+dashboard.getRange("E13").formulas = [[`=COUNTIFS(${leadSheetName}!$A$2:$A$1001,"<>",${leadSheetName}!$M$2:$M$1001,"<>")`]];
 dashboard.getRange("D10:F10").format = {
   fill: headerFill,
   font: { name: font, size: 10, bold: true, color: ink },
@@ -104,7 +107,7 @@ dashboard.getRange("D11:F13").format.borders = {
 };
 
 const chart = dashboard.charts.add("bar", dashboard.getRange("A10:B16"));
-chart.title = "Prospectos por estado";
+chart.title = websiteCrm ? "Clientes por estado" : "Prospectos por estado";
 chart.titleTextStyle.fontSize = 12;
 chart.titleTextStyle.typeface = font;
 chart.hasLegend = false;
@@ -123,7 +126,7 @@ dashboard.getRange("2:2").format.rowHeight = 26;
 dashboard.getRange("5:7").format.rowHeight = 24;
 
 const leadHeaders = [
-  "ID del prospecto", "Creado", "Actualizado", "Nombre", "Empresa", "Email", "Tamaño del equipo", "Desafío",
+  websiteCrm ? "ID del cliente" : "ID del prospecto", "Creado", "Actualizado", "Nombre", "Empresa", "Email", "Tamaño del equipo", "Desafío",
   "Idioma", "Estado", "Responsable", "Próximo seguimiento", "Fuente", "Medio", "Campaña", "URL de landing",
   "Consentimiento", "Última nota",
 ];
@@ -131,7 +134,7 @@ leads.getRange("A1:R2").values = [
   leadHeaders,
   [null, null, null, null, null, null, null, null, null, "Nuevo", null, null, null, null, null, null, null, null],
 ];
-const leadsTable = leads.tables.add("A1:R2", true, "LeadsTable");
+const leadsTable = leads.tables.add("A1:R2", true, websiteCrm ? "ClientsTable" : "LeadsTable");
 leadsTable.style = "TableStyleLight1";
 leadsTable.showFilterButton = true;
 leads.getRange("A1:R1").format = {
@@ -160,7 +163,7 @@ leadWidths.forEach((width, index) => { leads.getRangeByIndexes(0, index, 2, 1).f
 leads.getRange("1:1").format.rowHeight = 34;
 leads.getRange("2:2").format.rowHeight = 24;
 
-const activityHeaders = ["ID de actividad", "ID del prospecto", "Fecha y hora", "Tipo", "Detalles", "Autor"];
+const activityHeaders = ["ID de actividad", websiteCrm ? "ID del cliente" : "ID del prospecto", "Fecha y hora", "Tipo", "Detalles", "Autor"];
 activity.getRange("A1:F2").values = [
   activityHeaders,
   [null, null, null, "Nota", null, null],
@@ -209,7 +212,7 @@ console.log(dashboardCheck.ndjson);
 console.log("FORMULA_ERRORS");
 console.log(formulaErrors.ndjson);
 
-for (const [sheetName, fileName] of [["Panel", "dashboard.png"], ["Prospectos", "leads.png"], ["Actividad", "activity.png"]]) {
+for (const [sheetName, fileName] of [["Panel", "dashboard.png"], [leadSheetName, "leads.png"], ["Actividad", "activity.png"]]) {
   const preview = await workbook.render({ sheetName, autoCrop: "all", scale: 1, format: "png" });
   await fs.writeFile(new URL(fileName, previewDir), new Uint8Array(await preview.arrayBuffer()));
 }

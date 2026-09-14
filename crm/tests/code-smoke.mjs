@@ -28,6 +28,7 @@ const baseLead = {
   utm_medium: 'paid-social',
   utm_campaign: 'qc-smb-ai-diagnostic',
   utm_content: 'fr-reel-01',
+  offer: 'ai-ready-website',
 };
 
 const lead = context.validatePublicLead_(baseLead);
@@ -35,15 +36,18 @@ assert.equal(lead.teamSize, '11–50');
 assert.equal(lead.language, 'fr');
 assert.equal(lead.source, 'facebook');
 assert.equal(lead.content, 'fr-reel-01');
+assert.equal(lead.offer, 'ai-ready-website');
 assert.equal(lead.appointmentDate, appointmentDate);
 assert.equal(lead.appointmentTime, '10:30');
 assert.equal(lead.consent, true);
 assert.match(context.appointmentNote_(lead), /Pendiente de confirmación/);
 assert.match(context.appointmentNote_(lead), /fr-reel-01/);
+assert.match(context.appointmentNote_(lead), /Sitio web preparado para IA/);
 
 assert.equal(context.normalizeTeamSize_('More than 200 people'), '200+');
 assert.equal(context.normalizeTeamSize_('1-10 personas'), '1–10');
 assert.equal(context.normalizeLanguage_('DE'), 'fr');
+assert.equal(context.normalizeOffer_('unknown-offer'), 'ai-adoption');
 
 assert.throws(
   () => context.validatePublicLead_({ ...baseLead, consent: '' }),

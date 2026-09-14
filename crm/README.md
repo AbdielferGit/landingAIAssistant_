@@ -10,16 +10,18 @@ El CRM usa una Google Sheet como base de datos y un proyecto de Google Apps Scri
 
 ## Configuración
 
-1. Abre la Google Sheet **AiAssistant CRM**.
+1. Abre la Google Sheet del CRM que deseas configurar.
 2. En Google Sheets, abre **Extensiones → Apps Script**.
 3. Copia `Code.gs` e `Index.html` al proyecto y activa la visualización del manifiesto para reemplazar `appsscript.json`.
-4. En **Configuración del proyecto → Propiedades del script**, crea `CRM_CONTACT_EMAIL` con el correo que recibirá las notificaciones. La dirección no se guarda en Git.
+4. En **Configuración del proyecto → Propiedades del script**, crea `CRM_CONTACT_EMAIL` con el correo que recibirá las notificaciones. Si la pestaña de clientes no se llama `Prospectos`, agrega también `CRM_LEADS_SHEET_NAME` con el nombre exacto, por ejemplo `Clientes`. Las direcciones y los tokens no se guardan en Git.
 5. Ejecuta `initializeCrm` una vez. La función enlaza la hoja y genera el token de administración.
 6. Guarda el token mostrado en el registro de ejecución dentro de un gestor de contraseñas.
 7. Implementa el proyecto como **Aplicación web**:
    - Ejecutar como: propietario del proyecto.
    - Acceso: cualquier usuario, para permitir envíos desde la landing.
-8. Copia la URL terminada en `/exec` a `NEXT_PUBLIC_CRM_ENDPOINT` y recompila el sitio para Bluehost.
+8. Copia la URL terminada en `/exec` a `NEXT_PUBLIC_CRM_ENDPOINT` para la oferta de adopción o a `NEXT_PUBLIC_WEBSITE_CRM_ENDPOINT` para la oferta de sitios web, y recompila el sitio para Bluehost.
+
+Cada oferta puede usar una instancia independiente de la misma arquitectura: un proyecto de Apps Script, una hoja de cálculo y un token de administración propios.
 
 ## Seguridad
 
@@ -31,4 +33,4 @@ El CRM usa una Google Sheet como base de datos y un proyecto de Google Apps Scri
 
 ## Citas y atribución
 
-La landing solicita una fecha y hora preferidas en la zona `America/Toronto`. El backend crea el prospecto como `Calificado`, usa la fecha como próximo seguimiento, registra una actividad `Reunión` y conserva `utm_source`, `utm_medium`, `utm_campaign` y `utm_content` en el historial. La disponibilidad se confirma manualmente por correo; no se presenta como una reserva instantánea.
+Las landings solicitan una fecha y hora preferidas en la zona `America/Toronto`. El backend crea el prospecto como `Calificado`, usa la fecha como próximo seguimiento, registra una actividad `Reunión` y conserva el servicio solicitado junto con `utm_source`, `utm_medium`, `utm_campaign` y `utm_content` en el historial. La disponibilidad se confirma manualmente por correo; no se presenta como una reserva instantánea.
