@@ -29,21 +29,21 @@ const adoptionCrmEndpoint = process.env.NEXT_PUBLIC_CRM_ENDPOINT?.trim() ?? '';
 const websiteCrmEndpoint = process.env.NEXT_PUBLIC_WEBSITE_CRM_ENDPOINT?.trim() ?? '';
 const taskDoctorBanners: Record<Locale, { intro: string; badge: string; message: string; privacy: string; href: string | null }> = {
   en: {
-    intro: 'Do it yourself',
+    intro: 'Make the first step yourself',
     badge: '100% FREE',
     message: 'Find repetitive browser work, see where time goes and uncover what to automate — privately.',
     privacy: 'No screenshots, page content or employee monitoring.',
     href: 'https://taskdoctor.ai/',
   },
   fr: {
-    intro: 'Faites-le vous-même',
+    intro: 'Faites vous-même le premier pas',
     badge: '100 % GRATUIT',
     message: 'Installez TaskDoctor pour repérer les tâches répétitives et le temps perdu — en toute confidentialité.',
     privacy: 'Aucune capture d’écran, aucun contenu de page, aucune surveillance.',
     href: 'https://taskdoctor.ai/',
   },
   es: {
-    intro: 'Hazlo tú mismo',
+    intro: 'Da tú mismo el primer paso',
     badge: '100% GRATIS',
     message: 'Instala TaskDoctor para detectar tareas repetitivas, tiempo perdido y oportunidades de automatización.',
     privacy: 'Sin capturas, contenido de páginas ni vigilancia de empleados.',
