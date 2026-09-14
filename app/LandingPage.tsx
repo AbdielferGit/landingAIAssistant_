@@ -27,26 +27,26 @@ const offerLinks: Record<Offer, Record<Locale, { href: string; label: string }>>
 const teamSizeValues = ['1–10', '11–50', '51–200', '200+'] as const;
 const adoptionCrmEndpoint = process.env.NEXT_PUBLIC_CRM_ENDPOINT?.trim() ?? '';
 const websiteCrmEndpoint = process.env.NEXT_PUBLIC_WEBSITE_CRM_ENDPOINT?.trim() ?? '';
-const taskDoctorBanners: Record<Locale, { badge: string; message: string; privacy: string; cta: string; href: string | null }> = {
+const taskDoctorBanners: Record<Locale, { intro: string; badge: string; message: string; privacy: string; href: string | null }> = {
   en: {
+    intro: 'Do it yourself',
     badge: '100% FREE',
     message: 'Find repetitive browser work, see where time goes and uncover what to automate — privately.',
     privacy: 'No screenshots, page content or employee monitoring.',
-    cta: 'Learn more',
     href: 'https://taskdoctor.ai/',
   },
   fr: {
+    intro: 'Faites-le vous-même',
     badge: '100 % GRATUIT',
     message: 'Installez TaskDoctor pour repérer les tâches répétitives et le temps perdu — en toute confidentialité.',
     privacy: 'Aucune capture d’écran, aucun contenu de page, aucune surveillance.',
-    cta: 'Lien français bientôt disponible',
     href: null,
   },
   es: {
+    intro: 'Hazlo tú mismo',
     badge: '100% GRATIS',
     message: 'Instala TaskDoctor para detectar tareas repetitivas, tiempo perdido y oportunidades de automatización.',
     privacy: 'Sin capturas, contenido de páginas ni vigilancia de empleados.',
-    cta: 'Enlace en español próximamente',
     href: null,
   },
 };
@@ -339,9 +339,11 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
   const taskDoctorBannerContent = (
     <div className="product-banner-inner shell">
       <span className="product-banner-brand"><i aria-hidden="true">✦</i> TaskDoctor.ai <em>{taskDoctor.badge}</em></span>
-      <span className="product-banner-message">{taskDoctor.message}</span>
+      <span className="product-banner-copy">
+        <span className="product-banner-intro">{taskDoctor.intro}</span>
+        <span className="product-banner-message">{taskDoctor.message}</span>
+      </span>
       <span className="product-banner-privacy">{taskDoctor.privacy}</span>
-      <strong>{taskDoctor.cta}{taskDoctor.href ? ' →' : ''}</strong>
     </div>
   );
 
@@ -360,7 +362,7 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
         </nav>
 
         {taskDoctor.href ? (
-          <a className="product-banner product-banner-link" href={taskDoctor.href} target="_blank" rel="noopener noreferrer" aria-label={`${taskDoctor.message} ${taskDoctor.cta}`}>
+          <a className="product-banner product-banner-link" href={taskDoctor.href} target="_blank" rel="noopener noreferrer" aria-label={`${taskDoctor.intro}. ${taskDoctor.message}`}>
             {taskDoctorBannerContent}
           </a>
         ) : (
