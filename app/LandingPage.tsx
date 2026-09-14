@@ -40,14 +40,14 @@ const taskDoctorBanners: Record<Locale, { intro: string; badge: string; message:
     badge: '100 % GRATUIT',
     message: 'Installez TaskDoctor pour repérer les tâches répétitives et le temps perdu — en toute confidentialité.',
     privacy: 'Aucune capture d’écran, aucun contenu de page, aucune surveillance.',
-    href: null,
+    href: 'https://taskdoctor.ai/',
   },
   es: {
     intro: 'Hazlo tú mismo',
     badge: '100% GRATIS',
     message: 'Instala TaskDoctor para detectar tareas repetitivas, tiempo perdido y oportunidades de automatización.',
     privacy: 'Sin capturas, contenido de páginas ni vigilancia de empleados.',
-    href: null,
+    href: 'https://taskdoctor.ai/',
   },
 };
 
