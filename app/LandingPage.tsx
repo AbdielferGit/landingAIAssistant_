@@ -407,11 +407,18 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
       <section className="use-cases section-pad" id="applications"><div className="shell">
         <div className="section-heading split-heading"><div><p className="kicker">{c.applicationsKicker}</p><h2>{c.applicationsTitle}</h2></div><p>{c.applicationsIntro}</p></div>
         <div className="case-grid">{c.useCases.map((item) => <article className="case-card" key={item.area}><div className="case-meta"><span>{item.number}</span><strong>{item.area}</strong></div><div className={`case-art case-art-${item.number}`} aria-hidden="true"><span /><span /><i /></div><h3>{item.title}</h3><p>{item.copy}</p><div className="tag-row">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></article>)}</div>
-      </div></section>
-
-      <section className="outcomes section-pad" id="results"><div className="shell outcomes-grid">
-        <div className="outcomes-copy"><p className="kicker kicker-light">{c.outcomesKicker}</p><h2>{c.outcomesOne}<br /><span>{c.outcomesTwo}</span></h2><p>{c.outcomesCopy}</p><a className="button button-lime" href="#diagnosis" onClick={openQuickForm}>{c.outcomesCta} <span>→</span></a></div>
-        <div className="metric-board"><div className="metric-main"><span>{c.metrics.recovered}</span><strong>{c.metrics.hours}</strong><small>{c.metrics.perWeek}</small></div><div><span>{c.metrics.speed}</span><strong>↓</strong><small>{c.metrics.cycle}</small></div><div><span>{c.metrics.quality}</span><strong>↑</strong><small>{c.metrics.consistency}</small></div><div><span>{c.metrics.adoption}</span><strong>%</strong><small>{c.metrics.activeUse}</small></div><div><span>{c.metrics.trust}</span><strong>✓</strong><small>{c.metrics.safeUse}</small></div></div>
+        <aside className="value-proof" id="results">
+          <div className="value-proof-copy"><p className="kicker">{c.outcomesKicker}</p><h3>{c.outcomesOne} <span>{c.outcomesTwo}</span></h3><p>{c.outcomesCopy}</p></div>
+          <div className="value-proof-metrics" aria-label={c.metrics.recovered}>
+            {[
+              [c.metrics.speed, '↓', c.metrics.cycle],
+              [c.metrics.quality, '↑', c.metrics.consistency],
+              [c.metrics.adoption, '%', c.metrics.activeUse],
+              [c.metrics.trust, '✓', c.metrics.safeUse],
+            ].map(([label, value, detail]) => <div key={label}><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>)}
+          </div>
+          <a className="value-proof-link" href="#diagnosis" onClick={openQuickForm}>{c.outcomesCta} <span aria-hidden="true">→</span></a>
+        </aside>
       </div></section>
 
       <section className="diagnostic section-pad" id="diagnosis"><div className="shell diagnostic-wrap">
