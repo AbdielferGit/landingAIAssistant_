@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getaiassistant.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://riveintelligente.ca';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'AiAssistant by InnovaMontreal — Adoption de l’IA en entreprise',
+  title: 'Rive Intelligente by Innova Montreal — Adoption de l’IA en entreprise',
   description: 'Nous accompagnons votre entreprise dans l’adoption pratique et responsable de l’intelligence artificielle.',
   keywords: ['adoption de l’IA', 'intelligence artificielle en entreprise', 'conseil en IA', 'automatisation des processus'],
   alternates: {
@@ -29,13 +29,17 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_CA',
     alternateLocale: ['en_US', 'es_ES'],
-    images: [{ url: '/og.png', width: 1730, height: 909, alt: 'AiAssistant — Une IA qui travaille avec votre équipe' }],
+    images: [{ url: '/og.png', width: 1730, height: 909, alt: 'Rive Intelligente — Une IA qui travaille avec votre équipe' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Une IA qui travaille avec votre équipe.',
     description: 'Adoption concrète. Résultats mesurables.',
     images: ['/og.png'],
+  },
+  icons: {
+    icon: [{ url: '/rive-intelligente-logo.png', type: 'image/png' }],
+    apple: '/rive-intelligente-logo.png',
   },
 };
 

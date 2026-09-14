@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LandingPage from '../LandingPage';
 
 export const metadata: Metadata = {
-  title: 'AiAssistant by InnovaMontreal — Adopción de IA para empresas',
+  title: 'Rive Intelligente by Innova Montreal — Adopción de IA para empresas',
   description: 'Acompañamos a tu empresa en la adopción práctica y responsable de inteligencia artificial.',
   alternates: {
     canonical: '/es/',
@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     description: 'Adopción práctica. Resultados medibles.',
     type: 'website',
     locale: 'es_ES',
-    images: [],
+    images: [{ url: '/og.png', width: 1730, height: 909, alt: 'Rive Intelligente — Las personas en el centro de la adopción de IA' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'IA que trabaja con tu equipo.',
     description: 'Adopción práctica. Resultados medibles.',
-    images: [],
+    images: ['/og.png'],
   },
 };
 

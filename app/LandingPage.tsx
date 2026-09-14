@@ -53,7 +53,7 @@ const taskDoctorBanners: Record<Locale, { intro: string; badge: string; message:
 
 const content = {
   es: {
-    navLabel: 'Navegación principal', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Idioma',
+    navLabel: 'Navegación principal', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Idioma',
     navMethod: 'Método', navApplications: 'Aplicaciones', navQuestions: 'Preguntas', call: 'Agenda una llamada',
     eyebrow: 'Personas primero · Valor comprobable', heroFirst: 'Adopta la IA.', heroSecond: 'Nunca a solas.',
     heroLead: 'Trabajamos junto a tu equipo para entender cada necesidad, elegir las herramientas adecuadas y demostrar el valor creado antes y después de implementarlas.',
@@ -94,7 +94,7 @@ const content = {
     promises: [['30 minutos', 'de conversación enfocada'], ['Una oportunidad', 'aterrizada a tu operación'], ['Sin compromiso', 'y sin discurso técnico']], sourceDetected: 'Fuente de campaña detectada:',
     successLabel: 'Cita solicitada', successTitle: 'Gracias. Hemos reservado tu preferencia.', successCopy: 'Te enviaremos un correo para confirmar la fecha y la hora de la conversación.', sendAnother: 'Enviar otra respuesta',
     formLabel: 'Diagnóstico inicial', formTitle: 'Completa tus datos', name: 'Nombre', namePlaceholder: 'Tu nombre', company: 'Empresa', companyPlaceholder: 'Nombre de la empresa', email: 'Email corporativo', emailPlaceholder: 'nombre@empresa.com', teamSize: 'Tamaño del equipo', select: 'Selecciona una opción', sizes: ['1–10 personas', '11–50 personas', '51–200 personas', 'Más de 200 personas'], challenge: '¿Qué te gustaría mejorar primero?', challengePlaceholder: 'Por ejemplo: reducir el tiempo que dedicamos a reportes semanales...', appointmentKicker: 'Elige tu preferencia', appointmentDate: 'Fecha preferida', appointmentTime: 'Hora preferida', appointmentTimezone: 'Hora de Montreal · La cita se confirma por correo', formSubmit: 'Reservar mi diagnóstico', demoNote: 'Los datos se guardan en nuestro CRM únicamente para gestionar tu solicitud y confirmar la cita.',
-    sending: 'Enviando…', consent: 'Acepto que AiAssistant almacene estos datos para responder a mi solicitud.', formError: 'No pudimos registrar la solicitud. Revisa tu conexión e inténtalo de nuevo.', formUnavailable: 'El formulario se está terminando de configurar. Inténtalo de nuevo más tarde.',
+    sending: 'Enviando…', consent: 'Acepto que Rive Intelligente almacene estos datos para responder a mi solicitud.', formError: 'No pudimos registrar la solicitud. Revisa tu conexión e inténtalo de nuevo.', formUnavailable: 'El formulario se está terminando de configurar. Inténtalo de nuevo más tarde.',
     faqKicker: 'Preguntas frecuentes', faqTitle: 'Antes de dar el primer paso.', faqs: [
       ['¿Necesitamos tener experiencia previa con IA?', 'No. Partimos del nivel real de tu equipo y diseñamos una adopción gradual, con lenguaje claro y casos aplicados a su trabajo diario.'],
       ['¿Esto implica cambiar todas nuestras herramientas?', 'No necesariamente. Primero buscamos valor en los procesos y sistemas que ya utilizas. Solo recomendamos nuevas herramientas cuando aportan una mejora concreta.'],
@@ -104,7 +104,7 @@ const content = {
     footerLineOne: 'La transición a la IA,', footerLineTwo: 'con claridad y propósito.', footerCta: 'Hablemos', footerDescriptor: 'Adopción de IA para empresas', backTop: 'Volver arriba ↑',
   },
   en: {
-    navLabel: 'Main navigation', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Language',
+    navLabel: 'Main navigation', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Language',
     navMethod: 'Method', navApplications: 'Applications', navQuestions: 'Questions', call: 'Book a call',
     eyebrow: 'People first · Provable value', heroFirst: 'Adopt AI.', heroSecond: 'Never on your own.',
     heroLead: 'We work alongside your team to understand each need, select the right tools and prove the value created before and after implementation.',
@@ -145,7 +145,7 @@ const content = {
     promises: [['30 minutes', 'of focused conversation'], ['One opportunity', 'grounded in your operations'], ['No obligation', 'and no technical pitch']], sourceDetected: 'Campaign source detected:',
     successLabel: 'Appointment requested', successTitle: 'Thank you. We saved your preferred time.', successCopy: 'We will email you to confirm the date and time of the conversation.', sendAnother: 'Send another response',
     formLabel: 'Initial assessment', formTitle: 'Tell us about yourself', name: 'Name', namePlaceholder: 'Your name', company: 'Company', companyPlaceholder: 'Company name', email: 'Work email', emailPlaceholder: 'name@company.com', teamSize: 'Team size', select: 'Select an option', sizes: ['1–10 people', '11–50 people', '51–200 people', 'More than 200 people'], challenge: 'What would you like to improve first?', challengePlaceholder: 'For example: reduce the time we spend on weekly reports...', appointmentKicker: 'Choose your preference', appointmentDate: 'Preferred date', appointmentTime: 'Preferred time', appointmentTimezone: 'Montreal time · Appointment confirmed by email', formSubmit: 'Book my assessment', demoNote: 'Your data is stored in our CRM only to manage your request and confirm the appointment.',
-    sending: 'Sending…', consent: 'I agree that AiAssistant may store this information to respond to my request.', formError: 'We could not record your request. Check your connection and try again.', formUnavailable: 'The form is still being configured. Please try again later.',
+    sending: 'Sending…', consent: 'I agree that Rive Intelligente may store this information to respond to my request.', formError: 'We could not record your request. Check your connection and try again.', formUnavailable: 'The form is still being configured. Please try again later.',
     faqKicker: 'Frequently asked questions', faqTitle: 'Before taking the first step.', faqs: [
       ['Do we need previous AI experience?', 'No. We start from your team’s actual level and design a gradual adoption path using clear language and cases drawn from everyday work.'],
       ['Will we need to replace all our tools?', 'Not necessarily. We first look for value in the processes and systems you already use. We only recommend new tools when they deliver a clear improvement.'],
@@ -155,7 +155,7 @@ const content = {
     footerLineOne: 'Your transition to AI,', footerLineTwo: 'with clarity and purpose.', footerCta: 'Let’s talk', footerDescriptor: 'AI adoption for companies', backTop: 'Back to top ↑',
   },
   fr: {
-    navLabel: 'Navigation principale', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Langue',
+    navLabel: 'Navigation principale', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Langue',
     navMethod: 'Méthode', navApplications: 'Applications', navQuestions: 'Questions', call: 'Réserver un appel',
     eyebrow: 'L’humain d’abord · Une valeur démontrable', heroFirst: 'Adoptez l’IA.', heroSecond: 'Jamais sans accompagnement.',
     heroLead: 'Nous travaillons aux côtés de votre équipe pour comprendre chaque besoin, choisir les bons outils et démontrer la valeur créée avant et après leur mise en place.',
@@ -196,7 +196,7 @@ const content = {
     promises: [['30 minutes', 'd’échange ciblé'], ['Une opportunité', 'ancrée dans vos opérations'], ['Sans engagement', 'et sans discours technique']], sourceDetected: 'Source de campagne détectée :',
     successLabel: 'Rendez-vous demandé', successTitle: 'Merci. Votre préférence est enregistrée.', successCopy: 'Nous vous écrirons pour confirmer la date et l’heure de l’échange.', sendAnother: 'Envoyer une autre réponse',
     formLabel: 'Diagnostic initial', formTitle: 'Parlez-nous de vous', name: 'Nom', namePlaceholder: 'Votre nom', company: 'Entreprise', companyPlaceholder: 'Nom de l’entreprise', email: 'Courriel professionnel', emailPlaceholder: 'nom@entreprise.com', teamSize: 'Taille de l’équipe', select: 'Sélectionnez une option', sizes: ['1–10 personnes', '11–50 personnes', '51–200 personnes', 'Plus de 200 personnes'], challenge: 'Que souhaitez-vous améliorer en premier ?', challengePlaceholder: 'Par exemple : réduire le temps consacré aux rapports hebdomadaires…', appointmentKicker: 'Choisissez votre préférence', appointmentDate: 'Date souhaitée', appointmentTime: 'Heure souhaitée', appointmentTimezone: 'Heure de Montréal · Rendez-vous confirmé par courriel', formSubmit: 'Réserver mon diagnostic', demoNote: 'Vos données sont conservées dans notre CRM uniquement pour gérer votre demande et confirmer le rendez-vous.',
-    sending: 'Envoi…', consent: 'J’accepte qu’AiAssistant conserve ces renseignements afin de répondre à ma demande.', formError: 'Nous n’avons pas pu enregistrer votre demande. Vérifiez votre connexion et réessayez.', formUnavailable: 'Le formulaire est en cours de configuration. Veuillez réessayer plus tard.',
+    sending: 'Envoi…', consent: 'J’accepte que Rive Intelligente conserve ces renseignements afin de répondre à ma demande.', formError: 'Nous n’avons pas pu enregistrer votre demande. Vérifiez votre connexion et réessayez.', formUnavailable: 'Le formulaire est en cours de configuration. Veuillez réessayer plus tard.',
     faqKicker: 'Questions fréquentes', faqTitle: 'Avant de faire le premier pas.', faqs: [
       ['Devons-nous déjà connaître l’IA ?', 'Non. Nous partons du niveau réel de votre équipe et concevons une adoption progressive, avec un langage clair et des cas issus du travail quotidien.'],
       ['Faut-il remplacer tous nos outils ?', 'Pas nécessairement. Nous cherchons d’abord de la valeur dans les processus et systèmes que vous utilisez déjà. Nous ne recommandons de nouveaux outils que s’ils apportent une amélioration concrète.'],
@@ -351,7 +351,7 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
     <main className="site-theme">
       <section className="hero" id="top">
         <nav className="nav shell" aria-label={c.navLabel}>
-          <a className="brand brand-header" href="https://www.innovamontreal.com/" target="_blank" rel="noopener noreferrer" aria-label={c.homeLabel}><span className="brand-mark" aria-hidden="true"><span /></span><span className="brand-name">AiAssistant <small>by InnovaMontreal</small></span></a>
+          <a className="brand brand-header" href="https://www.innovamontreal.com/" target="_blank" rel="noopener noreferrer" aria-label={c.homeLabel}><span className="brand-logo" aria-hidden="true"><img src="/rive-intelligente-logo.png" alt="" /></span><span className="brand-name">Rive Intelligente <small>by Innova Montreal</small></span></a>
           <div className="nav-links"><a className="nav-offer-link" href={alternateOffer.href}>{alternateOffer.label}</a><a href="#method">{c.navMethod}</a><a href="#applications">{c.navApplications}</a><a href="#questions">{c.navQuestions}</a></div>
           <div className="nav-actions">
             <div className="language-switcher" aria-label={c.languageLabel}>
@@ -430,7 +430,7 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
 
       <section className="faq section-pad" id="questions"><div className="shell faq-grid"><div className="section-heading sticky-heading"><p className="kicker">{c.faqKicker}</p><h2>{c.faqTitle}</h2></div><div className="faq-list">{c.faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{question}</span><i aria-hidden="true">+</i></summary><p>{answer}</p></details>)}</div></div></section>
 
-      <footer><div className="shell footer-main"><a className="brand brand-footer" href="#top"><span className="brand-mark" aria-hidden="true"><span /></span><span>AiAssistant</span></a><p>{c.footerLineOne}<br />{c.footerLineTwo}</p><a className="footer-cta" href="#diagnosis" onClick={openQuickForm}>{c.footerCta} <span>↗</span></a></div><div className="shell footer-bottom"><span>© 2026 AiAssistant</span><span>{c.footerDescriptor}</span><a href="#top">{c.backTop}</a></div></footer>
+      <footer><div className="shell footer-main"><a className="brand brand-footer" href="#top"><span className="brand-logo" aria-hidden="true"><img src="/rive-intelligente-logo.png" alt="" /></span><span>Rive Intelligente</span></a><p>{c.footerLineOne}<br />{c.footerLineTwo}</p><a className="footer-cta" href="#diagnosis" onClick={openQuickForm}>{c.footerCta} <span>↗</span></a></div><div className="shell footer-bottom"><span>© 2026 Rive Intelligente</span><span>{c.footerDescriptor}</span><a href="#top">{c.backTop}</a></div></footer>
 
       <a className="quick-access-cta" href="#diagnosis" onClick={openQuickForm} aria-label={c.request}>
         <strong>{c.request}</strong><i aria-hidden="true">↗</i>

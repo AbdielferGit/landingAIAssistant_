@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LandingPage from '../LandingPage';
 
 export const metadata: Metadata = {
-  title: 'Sites web prêts pour l’IA — AiAssistant by InnovaMontreal',
+  title: 'Sites web prêts pour l’IA — Rive Intelligente by Innova Montreal',
   description: 'Un site web évolutif avec CRM, chatbot, commerce en ligne, paiements et tunnels de vente selon vos besoins.',
   alternates: {
     canonical: '/sites-ia/',
@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     description: 'Site, CRM, chatbot, commerce et tunnels de vente dans une architecture évolutive.',
     type: 'website',
     locale: 'fr_CA',
-    images: [],
+    images: [{ url: '/og.png', width: 1730, height: 909, alt: 'Rive Intelligente — Sites web prêts pour l’IA' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Votre site peut devenir le système de votre croissance.',
     description: 'Site, CRM, chatbot, commerce et tunnels de vente dans une architecture évolutive.',
-    images: [],
+    images: ['/og.png'],
   },
 };
 

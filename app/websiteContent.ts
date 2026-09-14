@@ -1,6 +1,6 @@
 export const websiteContent = {
   es: {
-    navLabel: 'Navegación principal', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Idioma',
+    navLabel: 'Navegación principal', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Idioma',
     navMethod: 'Método', navApplications: 'Opciones', navQuestions: 'Preguntas', call: 'Evaluar mi proyecto',
     eyebrow: 'Sitios modulares · IA integrable', heroFirst: 'Tu web puede ser', heroSecond: 'el sistema de tu crecimiento.',
     heroLead: 'Creamos sitios web preparados para incorporar chatbot, CRM propio, tienda online, pagos y túneles de venta, sin obligarte a comprar una plataforma de IA.',
@@ -40,7 +40,7 @@ export const websiteContent = {
     promises: [['30 minutos', 'para entender el proyecto'], ['Una arquitectura', 'adaptada a tus objetivos'], ['Sin obligación', 'de comprar una solución de IA']], sourceDetected: 'Fuente de campaña detectada:',
     successLabel: 'Consulta solicitada', successTitle: 'Gracias. Guardamos tu horario preferido.', successCopy: 'Te escribiremos para confirmar la fecha y preparar la conversación sobre tu sitio.', sendAnother: 'Enviar otra respuesta',
     formLabel: 'Evaluación del proyecto', formTitle: 'Cuéntanos sobre tu sitio', name: 'Nombre', namePlaceholder: 'Tu nombre', company: 'Empresa', companyPlaceholder: 'Nombre de la empresa', email: 'Email corporativo', emailPlaceholder: 'nombre@empresa.com', teamSize: 'Tamaño del equipo', select: 'Selecciona una opción', sizes: ['1–10 personas', '11–50 personas', '51–200 personas', 'Más de 200 personas'], challenge: '¿Qué debería lograr tu nuevo sitio?', challengePlaceholder: 'Por ejemplo: generar citas, organizar prospectos, vender en línea o responder preguntas…', appointmentKicker: 'Elige tu preferencia', appointmentDate: 'Fecha preferida', appointmentTime: 'Hora preferida', appointmentTimezone: 'Hora de Montreal · La cita se confirma por correo', formSubmit: 'Evaluar mi proyecto', demoNote: 'Los datos se guardan en nuestro CRM únicamente para gestionar tu solicitud y confirmar la cita.',
-    sending: 'Enviando…', consent: 'Acepto que AiAssistant almacene estos datos para responder a mi solicitud.', formError: 'No pudimos registrar la solicitud. Revisa tu conexión e inténtalo de nuevo.', formUnavailable: 'El formulario se está terminando de configurar. Inténtalo de nuevo más tarde.',
+    sending: 'Enviando…', consent: 'Acepto que Rive Intelligente almacene estos datos para responder a mi solicitud.', formError: 'No pudimos registrar la solicitud. Revisa tu conexión e inténtalo de nuevo.', formUnavailable: 'El formulario se está terminando de configurar. Inténtalo de nuevo más tarde.',
     faqKicker: 'Preguntas frecuentes', faqTitle: 'Antes de iniciar el proyecto.', faqs: [
       ['¿Necesito comprar una plataforma de IA?', 'No. El sitio se crea primero como una base útil y modular. Si un chatbot u otra función de IA aporta valor, se integra con el proveedor y el alcance adecuados.'],
       ['¿Mi alojamiento permite una tienda online?', 'El alojamiento actual dispone de SSL, bases de datos, PHP y herramientas de instalación compatibles con una solución de comercio. La configuración final se valida según catálogo, tráfico y operación.'],
@@ -50,7 +50,7 @@ export const websiteContent = {
     footerLineOne: 'Tu sitio web,', footerLineTwo: 'preparado para lo que sigue.', footerCta: 'Hablemos', footerDescriptor: 'Sitios web preparados para integrar IA', backTop: 'Volver arriba ↑',
   },
   en: {
-    navLabel: 'Main navigation', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Language',
+    navLabel: 'Main navigation', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Language',
     navMethod: 'Method', navApplications: 'Options', navQuestions: 'Questions', call: 'Assess my project',
     eyebrow: 'Modular websites · AI-ready', heroFirst: 'Your website can become', heroSecond: 'your growth system.',
     heroLead: 'We build websites ready to add a chatbot, your own CRM, online store, payments and sales funnels—without forcing you to buy an AI platform.',
@@ -90,7 +90,7 @@ export const websiteContent = {
     promises: [['30 minutes', 'to understand the project'], ['One architecture', 'built around your goals'], ['No obligation', 'to purchase an AI solution']], sourceDetected: 'Campaign source detected:',
     successLabel: 'Consultation requested', successTitle: 'Thank you. We saved your preferred time.', successCopy: 'We will email you to confirm the date and prepare the conversation about your website.', sendAnother: 'Send another response',
     formLabel: 'Project assessment', formTitle: 'Tell us about your website', name: 'Name', namePlaceholder: 'Your name', company: 'Company', companyPlaceholder: 'Company name', email: 'Work email', emailPlaceholder: 'name@company.com', teamSize: 'Team size', select: 'Select an option', sizes: ['1–10 people', '11–50 people', '51–200 people', 'More than 200 people'], challenge: 'What should your new website achieve?', challengePlaceholder: 'For example: generate appointments, organize leads, sell online or answer questions…', appointmentKicker: 'Choose your preference', appointmentDate: 'Preferred date', appointmentTime: 'Preferred time', appointmentTimezone: 'Montreal time · Appointment confirmed by email', formSubmit: 'Assess my project', demoNote: 'Your data is stored in our CRM only to manage your request and confirm the appointment.',
-    sending: 'Sending…', consent: 'I agree that AiAssistant may store this information to respond to my request.', formError: 'We could not record your request. Check your connection and try again.', formUnavailable: 'The form is still being configured. Please try again later.',
+    sending: 'Sending…', consent: 'I agree that Rive Intelligente may store this information to respond to my request.', formError: 'We could not record your request. Check your connection and try again.', formUnavailable: 'The form is still being configured. Please try again later.',
     faqKicker: 'Frequently asked questions', faqTitle: 'Before starting the project.', faqs: [
       ['Do I need to buy an AI platform?', 'No. The website is first built as a useful, modular foundation. If a chatbot or another AI capability adds value, we integrate the appropriate provider and scope.'],
       ['Can my hosting support an online store?', 'The current hosting provides SSL, databases, PHP and installation tools compatible with a commerce solution. Final configuration is validated against the catalogue, traffic and operations.'],
@@ -100,7 +100,7 @@ export const websiteContent = {
     footerLineOne: 'Your website,', footerLineTwo: 'ready for what comes next.', footerCta: 'Let’s talk', footerDescriptor: 'Websites ready for AI integration', backTop: 'Back to top ↑',
   },
   fr: {
-    navLabel: 'Navigation principale', homeLabel: 'AiAssistant by InnovaMontreal', languageLabel: 'Langue',
+    navLabel: 'Navigation principale', homeLabel: 'Rive Intelligente by Innova Montreal', languageLabel: 'Langue',
     navMethod: 'Méthode', navApplications: 'Options', navQuestions: 'Questions', call: 'Évaluer mon projet',
     eyebrow: 'Sites modulaires · IA intégrable', heroFirst: 'Votre site peut devenir', heroSecond: 'le système de votre croissance.',
     heroLead: 'Nous créons des sites prêts à intégrer un chatbot, votre propre CRM, une boutique en ligne, des paiements et des tunnels de vente, sans vous obliger à acheter une plateforme d’IA.',
@@ -140,7 +140,7 @@ export const websiteContent = {
     promises: [['30 minutes', 'pour comprendre le projet'], ['Une architecture', 'adaptée à vos objectifs'], ['Sans obligation', 'd’acheter une solution d’IA']], sourceDetected: 'Source de campagne détectée :',
     successLabel: 'Consultation demandée', successTitle: 'Merci. Votre préférence est enregistrée.', successCopy: 'Nous vous écrirons pour confirmer la date et préparer l’échange sur votre site.', sendAnother: 'Envoyer une autre réponse',
     formLabel: 'Évaluation du projet', formTitle: 'Parlez-nous de votre site', name: 'Nom', namePlaceholder: 'Votre nom', company: 'Entreprise', companyPlaceholder: 'Nom de l’entreprise', email: 'Courriel professionnel', emailPlaceholder: 'nom@entreprise.com', teamSize: 'Taille de l’équipe', select: 'Sélectionnez une option', sizes: ['1–10 personnes', '11–50 personnes', '51–200 personnes', 'Plus de 200 personnes'], challenge: 'Que doit accomplir votre nouveau site ?', challengePlaceholder: 'Par exemple : générer des rendez-vous, organiser les prospects, vendre en ligne ou répondre aux questions…', appointmentKicker: 'Choisissez votre préférence', appointmentDate: 'Date souhaitée', appointmentTime: 'Heure souhaitée', appointmentTimezone: 'Heure de Montréal · Rendez-vous confirmé par courriel', formSubmit: 'Évaluer mon projet', demoNote: 'Vos données sont conservées dans notre CRM uniquement pour gérer votre demande et confirmer le rendez-vous.',
-    sending: 'Envoi…', consent: 'J’accepte qu’AiAssistant conserve ces renseignements afin de répondre à ma demande.', formError: 'Nous n’avons pas pu enregistrer la demande. Vérifiez votre connexion et réessayez.', formUnavailable: 'Le formulaire est en cours de configuration. Veuillez réessayer plus tard.',
+    sending: 'Envoi…', consent: 'J’accepte que Rive Intelligente conserve ces renseignements afin de répondre à ma demande.', formError: 'Nous n’avons pas pu enregistrer la demande. Vérifiez votre connexion et réessayez.', formUnavailable: 'Le formulaire est en cours de configuration. Veuillez réessayer plus tard.',
     faqKicker: 'Questions fréquentes', faqTitle: 'Avant de lancer le projet.', faqs: [
       ['Dois-je acheter une plateforme d’IA ?', 'Non. Le site est d’abord conçu comme une base utile et modulaire. Si un chatbot ou une autre fonction d’IA crée de la valeur, nous intégrons le fournisseur et la portée appropriés.'],
       ['Mon hébergement permet-il une boutique en ligne ?', 'L’hébergement actuel offre SSL, bases de données, PHP et outils d’installation compatibles avec une solution de commerce. La configuration finale dépend du catalogue, du trafic et des opérations.'],
