@@ -394,16 +394,14 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
         </div>
       </section>
 
-      <section className="signal-strip" aria-label={c.signalLabel}><div className="shell signal-inner"><p>{c.intent}</p><span /><p>{c.strategy}</p><i>+</i><p>{c.processes}</p><i>+</i><p>{c.people}</p><span /><p>{c.purpose}</p></div></section>
-
-      <section className="friction section-pad"><div className="shell friction-grid">
-        <div className="section-heading sticky-heading"><p className="kicker">{c.challengeKicker}</p><h2>{c.challengeTitle}</h2></div>
-        <div className="friction-copy"><p className="big-copy">{c.challengeIntro}</p><div className="friction-list">{c.frictions.map(([title, description], index) => <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{description}</p></div></article>)}</div><div className="insight-callout"><span aria-hidden="true">→</span><p><strong>{c.bridgeStrong}</strong> {c.bridgeRest}</p></div></div>
+      <section className="diagnostic diagnostic-priority section-pad" id="diagnosis"><div className="shell diagnostic-wrap">
+        <div className="diagnostic-copy"><p className="kicker">{c.diagnosisKicker}</p><h2>{c.diagnosisTitle}</h2><p>{c.diagnosisCopy}</p><div className="promise-list">{c.promises.map(([value, detail], index) => <div key={value}><span>0{index + 1}</span><p><strong>{value}</strong> {detail}</p></div>)}</div>{campaign.source && <div className="source-detected"><i /> {c.sourceDetected} <strong>{campaign.source}</strong></div>}</div>
+        {renderLeadForm()}
       </div></section>
 
       <section className="method section-pad" id="method"><div className="shell">
         <div className="section-heading method-heading"><p className="kicker kicker-light">{c.methodKicker}</p><h2>{c.methodTitleOne}<br />{c.methodTitleTwo}</h2><p>{c.methodIntro}</p></div>
-        <div className="method-grid">{c.methods.map((method, index) => <article key={method.title} className={index === 2 ? 'featured-method' : ''}><div className="method-top"><span>0{index + 1}</span><i>{method.stage}</i></div><div className={`method-glyph ${index === 0 ? 'glyph-radar' : index === 1 ? 'glyph-flow' : index === 2 ? 'glyph-people' : 'glyph-measure'}`} aria-hidden="true">{index === 0 ? <><span /><b /><i /></> : index === 1 ? <><span /><span /><span /><b /><b /></> : <><span /><span /><span /><b /></>}</div><h3>{method.title}</h3><p>{method.copy}</p><ul>{method.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul></article>)}</div>
+        <div className="method-grid">{c.methods.map((method, index) => <article key={method.title} className={index === 2 ? 'featured-method' : ''}><div className="method-top"><span>0{index + 1}</span><i>{method.stage}</i></div><div className={`method-glyph ${index === 0 ? 'glyph-radar' : index === 1 ? 'glyph-flow' : index === 2 ? 'glyph-people' : 'glyph-measure'}`} aria-hidden="true">{index === 0 ? <><span /><b /><i /></> : index === 1 ? <><span /><span /><span /><b /><b /></> : <><span /><span /><span /><b /></>}</div><h3>{method.title}</h3><p>{method.copy}</p></article>)}</div>
       </div></section>
 
       <section className="use-cases section-pad" id="applications"><div className="shell">
@@ -423,12 +421,7 @@ export default function LandingPage({ locale, offer = 'adoption' }: { locale: Lo
         </aside>
       </div></section>
 
-      <section className="diagnostic section-pad" id="diagnosis"><div className="shell diagnostic-wrap">
-        <div className="diagnostic-copy"><p className="kicker">{c.diagnosisKicker}</p><h2>{c.diagnosisTitle}</h2><p>{c.diagnosisCopy}</p><div className="promise-list">{c.promises.map(([value, detail], index) => <div key={value}><span>0{index + 1}</span><p><strong>{value}</strong> {detail}</p></div>)}</div>{campaign.source && <div className="source-detected"><i /> {c.sourceDetected} <strong>{campaign.source}</strong></div>}</div>
-        {renderLeadForm()}
-      </div></section>
-
-      <section className="faq section-pad" id="questions"><div className="shell faq-grid"><div className="section-heading sticky-heading"><p className="kicker">{c.faqKicker}</p><h2>{c.faqTitle}</h2></div><div className="faq-list">{c.faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{question}</span><i aria-hidden="true">+</i></summary><p>{answer}</p></details>)}</div></div></section>
+      <section className="faq section-pad" id="questions"><div className="shell faq-grid"><div className="section-heading sticky-heading"><p className="kicker">{c.faqKicker}</p><h2>{c.faqTitle}</h2></div><div className="faq-list">{c.faqs.slice(0, 3).map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{question}</span><i aria-hidden="true">+</i></summary><p>{answer}</p></details>)}</div></div></section>
 
       <footer><div className="shell footer-main"><a className="brand brand-footer" href="#top"><span className="brand-logo" aria-hidden="true"><img src="/rive-intelligente-logo.png" alt="" /></span><span>Rive Intelligente</span></a><p>{c.footerLineOne}<br />{c.footerLineTwo}</p><a className="footer-cta" href="#diagnosis" onClick={openQuickForm}>{c.footerCta} <span>↗</span></a></div><div className="shell footer-bottom"><span>© 2026 Rive Intelligente</span><span>{c.footerDescriptor}</span><a href="#top">{c.backTop}</a></div></footer>
 
