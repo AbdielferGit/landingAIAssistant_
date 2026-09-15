@@ -45,7 +45,7 @@ La implementación y las instrucciones están en [`crm/`](crm/README.md).
 ## Generar la versión estática para Bluehost
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://getaiassistant.app \
+NEXT_PUBLIC_SITE_URL=https://riveintelligente.ca \
 NEXT_PUBLIC_CRM_ENDPOINT=https://script.google.com/macros/s/DEPLOYMENT_ID/exec \
 NEXT_PUBLIC_WEBSITE_CRM_ENDPOINT=https://script.google.com/macros/s/WEBSITE_DEPLOYMENT_ID/exec \
 pnpm build:bluehost

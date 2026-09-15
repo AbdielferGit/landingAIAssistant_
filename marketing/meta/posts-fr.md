@@ -17,7 +17,7 @@ Toutes les URL sont mesurables et mènent au formulaire de demande de rendez-vou
 L’IA entre souvent dans l’entreprise avant la stratégie : quelques essais, plusieurs outils et aucune façon commune de travailler. Nous aidons les PME à choisir un premier cas utile, à le tester dans les opérations et à accompagner l’équipe. Découvrez par où commencer avec un diagnostic de 30 minutes.
 
 **CTA :** Réserver mon diagnostic  
-**Lien :** `https://getaiassistant.app/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-01#diagnosis`  
+**Lien :** `https://riveintelligente.ca/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-01#diagnosis`
 **Hashtags :** `#IntelligenceArtificielle #PME #Montréal #TransformationNumérique`
 
 ## FR02 — Carrousel · Découverte
@@ -37,7 +37,7 @@ L’IA entre souvent dans l’entreprise avant la stratégie : quelques essais, 
 Vous n’avez pas besoin d’automatiser toute l’entreprise. Le bon premier projet est fréquent, mesurable, suffisamment simple pour être testé et assez utile pour mobiliser l’équipe. Lequel de ces signes reconnaissez-vous ?
 
 **CTA :** Identifier ma première opportunité  
-**Lien :** `https://getaiassistant.app/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-02#diagnosis`
+**Lien :** `https://riveintelligente.ca/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-02#diagnosis`
 
 ## FR03 — Image · Découverte
 
@@ -48,7 +48,7 @@ Vous n’avez pas besoin d’automatiser toute l’entreprise. Le bon premier pr
 Acheter un outil est rapide. Transformer une façon de travailler demande une priorité, un pilote, des règles claires et un accompagnement adapté aux rôles. C’est là que la valeur devient durable.
 
 **CTA :** Voir notre méthode  
-**Lien :** `https://getaiassistant.app/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-static-03#method`
+**Lien :** `https://riveintelligente.ca/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-static-03#method`
 
 ## FR04 — Reel · Considération
 
@@ -63,7 +63,7 @@ Acheter un outil est rapide. Transformer une façon de travailler demande une pr
 Un bon pilote commence par le processus, pas par la technologie. Nous cartographions le travail actuel, choisissons les contrôles nécessaires et mesurons ce qui change réellement.
 
 **CTA :** Parler de mon processus  
-**Lien :** `https://getaiassistant.app/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-04#diagnosis`
+**Lien :** `https://riveintelligente.ca/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-04#diagnosis`
 
 ## FR05 — Carrousel · Considération
 
@@ -80,7 +80,7 @@ Un bon pilote commence par le processus, pas par la technologie. Nous cartograph
 Passer de la curiosité à l’usage quotidien demande un chemin visible. Notre méthode réduit l’incertitude : une opportunité priorisée, un pilote appliqué, puis une adoption accompagnée.
 
 **CTA :** Découvrir mon point de départ  
-**Lien :** `https://getaiassistant.app/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-05#diagnosis`
+**Lien :** `https://riveintelligente.ca/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-05#diagnosis`
 
 ## FR06 — Reel · Considération
 
@@ -98,7 +98,7 @@ Passer de la curiosité à l’usage quotidien demande un chemin visible. Notre 
 La gouvernance ne doit pas arriver après le pilote. Elle commence avec le choix des données, des outils, des responsabilités et des vérifications. Une adoption utile doit aussi être une adoption maîtrisée.
 
 **CTA :** Discuter d’un pilote responsable  
-**Lien :** `https://getaiassistant.app/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-06#diagnosis`
+**Lien :** `https://riveintelligente.ca/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-06#diagnosis`
 
 ## FR07 — Image · Conversion
 
@@ -109,7 +109,7 @@ La gouvernance ne doit pas arriver après le pilote. Elle commence avec le choix
 Vous savez que l’IA peut aider votre entreprise, mais vous ne savez pas quel projet lancer en premier ? Pendant un diagnostic de 30 minutes, nous examinons une friction réelle de votre équipe et identifions la prochaine étape la plus utile. Sans engagement et sans discours technique.
 
 **CTA :** Réserver mon diagnostic  
-**Lien :** `https://getaiassistant.app/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-static-07#diagnosis`
+**Lien :** `https://riveintelligente.ca/?utm_source=instagram&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-static-07#diagnosis`
 
 ## FR08 — Carrousel · Conversion / Retargeting
 
@@ -127,5 +127,4 @@ Vous savez que l’IA peut aider votre entreprise, mais vous ne savez pas quel p
 Pas de présentation générique. Nous partons de votre réalité : équipe, processus, contraintes et résultat recherché. Choisissez une date et une heure; nous vous écrirons pour confirmer le rendez-vous.
 
 **CTA :** Choisir mon créneau  
-**Lien :** `https://getaiassistant.app/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-08#diagnosis`
-
+**Lien :** `https://riveintelligente.ca/?utm_source=facebook&utm_medium=organic-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-carousel-08#diagnosis`

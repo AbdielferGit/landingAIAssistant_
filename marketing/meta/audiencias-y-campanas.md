@@ -48,7 +48,7 @@ No activar sin aprobación. Como punto de partida para obtener señal:
 
 Ejemplo:
 
-`https://getaiassistant.app/?utm_source=instagram&utm_medium=paid-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-01#diagnosis`
+`https://riveintelligente.ca/?utm_source=instagram&utm_medium=paid-social&utm_campaign=qc-smb-ai-diagnostic-2026q3&utm_content=fr-reel-01#diagnosis`
 
 ## Indicadores y decisiones
 
